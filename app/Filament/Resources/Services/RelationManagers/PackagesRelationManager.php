@@ -5,11 +5,12 @@ namespace App\Filament\Resources\Services\RelationManagers;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
-use Filament\Forms\Components\TagsInput;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
+use Filament\Support\RawJs;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -43,17 +44,19 @@ class PackagesRelationManager extends RelationManager
                 ->helperText('Opsional, mis. "Cocok untuk 1-2 perangkat".'),
             TextInput::make('price')
                 ->label('Harga')
-                ->placeholder('150000')
-                ->numeric()
+                ->placeholder('150.000')
                 ->prefix('Rp')
-                ->helperText('Kosongkan kalau harga custom atau nego.'),
-            TextInput::make('price_label')
-                ->label('Label harga')
-                ->placeholder('Contoh: Per bulan')
-                ->datalist(['Per bulan', 'Sekali bayar', 'Hubungi kami']),
-            TagsInput::make('features')
+                ->mask(RawJs::make(<<<'JS'
+                    $money($input, ',', '.', 0)
+                    JS))
+                ->stripCharacters('.')
+                ->numeric()
+                ->helperText('Kosongkan kalau harga custom atau nego. Cukup ketik angkanya, mis. 150000, otomatis diformat.'),
+            Repeater::make('features')
                 ->label('Poin fitur')
-                ->placeholder('Unlimited, tanpa FUP')
+                ->simple(TextInput::make('item')->label('Fitur')->placeholder('Contoh: Unlimited, tanpa FUP')->required())
+                ->addActionLabel('Tambah fitur')
+                ->defaultItems(0)
                 ->helperText('Ditampilkan sebagai daftar centang di kartu harga.'),
         ]);
     }

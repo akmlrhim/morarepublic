@@ -13,7 +13,6 @@ class Package extends Model
         'speed_mbps',
         'description',
         'price',
-        'price_label',
         'features',
         'is_featured',
         'order',
@@ -34,16 +33,14 @@ class Package extends Model
     }
 
     /**
-     * Harga siap tampil, mis. "Rp 150.000" atau "Hubungi kami".
+     * Harga siap tampil, mis. "Rp 150.000".
      */
     public function priceDisplay(): ?string
     {
         if ($this->price === null) {
-            return $this->price_label ?: null;
+            return null;
         }
 
-        $amount = 'Rp '.number_format((float) $this->price, 0, ',', '.');
-
-        return trim(($this->price_label ? $this->price_label.' ' : '').$amount);
+        return 'Rp '.number_format((float) $this->price, 0, ',', '.');
     }
 }

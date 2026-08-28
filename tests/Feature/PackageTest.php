@@ -10,7 +10,7 @@ use Livewire\Livewire;
 
 it('menampilkan halaman daftar paket dan harga dikelompokkan per layanan', function () {
     $service = Service::create(['slug' => 'demo', 'name' => 'Demo Layanan', 'status' => PublishStatus::Published]);
-    Package::create(['service_id' => $service->id, 'name' => '10 Mbps', 'price_label' => 'Hubungi kami', 'order' => 1]);
+    Package::create(['service_id' => $service->id, 'name' => '10 Mbps', 'order' => 1]);
 
     $this->get('/paket-dan-harga')
         ->assertOk()
@@ -31,7 +31,7 @@ it('tidak menampilkan layanan yang belum punya paket', function () {
 
 it('menyertakan daftar paket di halaman detail layanan', function () {
     $service = Service::create(['slug' => 'demo-detail', 'name' => 'Demo Detail', 'status' => PublishStatus::Published]);
-    Package::create(['service_id' => $service->id, 'name' => '20 Mbps', 'price_label' => 'Hubungi kami', 'order' => 1]);
+    Package::create(['service_id' => $service->id, 'name' => '20 Mbps', 'order' => 1]);
 
     $this->get('/layanan/demo-detail')
         ->assertOk()
@@ -52,7 +52,6 @@ it('admin bisa menambah paket harga lewat relation manager', function () {
         ->callTableAction('create', data: [
             'name' => '10 Mbps',
             'description' => 'Cocok untuk 1-2 perangkat',
-            'price_label' => 'Hubungi kami',
         ])
         ->assertHasNoTableActionErrors();
 

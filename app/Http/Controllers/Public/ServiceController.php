@@ -26,7 +26,6 @@ class ServiceController extends Controller
                 'short_description' => $service->short_description,
                 'content' => $service->content,
                 'image' => SiteConfig::asset($service->image),
-                'benefits' => $service->benefits ?? [],
                 'packages' => self::toPackages($service),
                 'is_hero' => $service->is_hero,
                 'id' => $service->id,

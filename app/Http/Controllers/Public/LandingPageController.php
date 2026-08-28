@@ -76,7 +76,6 @@ class LandingPageController extends Controller
             'slug' => $product->slug,
             'short_description' => $product->short_description,
             'image' => SiteConfig::asset($product->image),
-            'benefits' => $product->benefits ?? [],
         ];
     }
 }

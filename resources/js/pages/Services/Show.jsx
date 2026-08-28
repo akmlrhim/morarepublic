@@ -31,21 +31,7 @@ export default function ServiceShow({ service, seo }) {
                     </div>
 
                     <aside className="lg:sticky lg:top-24 lg:self-start">
-                        {service.benefits?.length > 0 ? (
-                            <div className="rounded-[var(--radius-card)] border border-line bg-white p-8 shadow-[var(--shadow-card)]">
-                                <h2 className="text-lg font-semibold text-ink">Yang kamu dapat</h2>
-                                <ul className="mt-5 space-y-3">
-                                    {service.benefits.map((benefit, index) => (
-                                        <li key={index} className="flex gap-3 text-sm leading-relaxed text-muted">
-                                            <span aria-hidden="true" className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-primary-500" />
-                                            {benefit}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ) : null}
-
-                        <div className="mt-6 rounded-[var(--radius-card)] bg-hero-gradient p-8 text-white shadow-[var(--shadow-card)]">
+                        <div className="rounded-[var(--radius-card)] bg-hero-gradient p-8 text-white shadow-[var(--shadow-card)]">
                             <h2 className="text-lg font-semibold">Tertarik dengan layanan ini?</h2>
                             <p className="mt-3 text-sm leading-relaxed text-white/80">
                                 Cek dulu ketersediaannya di area kamu, atau langsung tanya tim kami.

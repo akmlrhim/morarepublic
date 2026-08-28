@@ -20,7 +20,6 @@ class Service extends Model
         'short_description',
         'content',
         'image',
-        'benefits',
         'customer_terms',
         'is_hero',
         'order',
@@ -30,7 +29,6 @@ class Service extends Model
     protected function casts(): array
     {
         return [
-            'benefits' => 'array',
             'customer_terms' => 'array',
             'is_hero' => 'boolean',
             'status' => PublishStatus::class,

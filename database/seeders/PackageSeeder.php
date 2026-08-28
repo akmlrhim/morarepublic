@@ -75,7 +75,6 @@ class PackageSeeder extends Seeder
                 $package + [
                     'service_id' => $service->id,
                     'is_featured' => false,
-                    'price_label' => 'Hubungi kami',
                     'order' => $index + 1,
                 ],
             );

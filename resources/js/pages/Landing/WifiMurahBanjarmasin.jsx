@@ -108,17 +108,6 @@ export default function WifiMurahBanjarmasin({ area, product, seo }) {
                         <div>
                             <SectionHeading eyebrow="Produk" title={product.name} description={product.short_description} />
 
-                            {product.benefits?.length > 0 ? (
-                                <ul className="mt-6 space-y-3">
-                                    {product.benefits.map((benefit, index) => (
-                                        <li key={index} className="flex gap-3 text-sm leading-relaxed text-muted">
-                                            <span aria-hidden="true" className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-primary-500" />
-                                            {benefit}
-                                        </li>
-                                    ))}
-                                </ul>
-                            ) : null}
-
                             <Button href={`/layanan/${product.slug}`} variant="ghost" size="sm" className="mt-8">
                                 Lihat detail layanan
                             </Button>

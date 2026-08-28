@@ -6,7 +6,6 @@ use App\Enums\PublishStatus;
 use App\Models\Service;
 use App\Support\ImageUploadOptimizer;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
@@ -52,16 +51,6 @@ class ServiceForm
                             ->directory('services')
                             ->visibility('public')
                             ->saveUploadedFileUsing(ImageUploadOptimizer::saveAsWebp(...)),
-                    ]),
-
-                Section::make('Benefit')
-                    ->columns(1)
-                    ->schema([
-                        Repeater::make('benefits')
-                            ->label('Poin benefit')
-                            ->simple(TextInput::make('item')->label('Benefit')->placeholder('Contoh: Gratis instalasi')->required())
-                            ->addActionLabel('Tambah benefit')
-                            ->defaultItems(0),
                     ]),
 
                 Section::make('Marketing dan SEO')
