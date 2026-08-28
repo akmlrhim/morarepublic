@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Services\Schemas;
 
 use App\Enums\PublishStatus;
+use App\Models\Service;
 use App\Support\ImageUploadOptimizer;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
@@ -51,23 +52,6 @@ class ServiceForm
                             ->directory('services')
                             ->visibility('public')
                             ->saveUploadedFileUsing(ImageUploadOptimizer::saveAsWebp(...)),
-                        TextInput::make('icon')
-                            ->label('Nama ikon')
-                            ->placeholder('Contoh: wifi'),
-                    ]),
-
-                Section::make('Harga')
-                    ->columns(1)
-                    ->schema([
-                        TextInput::make('price')
-                            ->label('Harga')
-                            ->placeholder('150000')
-                            ->numeric()
-                            ->prefix('Rp'),
-                        TextInput::make('price_label')
-                            ->label('Label harga')
-                            ->placeholder('Contoh: Mulai dari')
-                            ->datalist(['Mulai dari', 'Per bulan', 'Hubungi kami']),
                     ]),
 
                 Section::make('Benefit')
@@ -89,7 +73,8 @@ class ServiceForm
                             ->label('Urutan tampil')
                             ->placeholder('0')
                             ->numeric()
-                            ->default(0),
+                            ->default(fn (): int => (Service::max('order') ?? 0) + 1)
+                            ->helperText('Terisi otomatis dengan urutan berikutnya, bisa diubah manual kalau perlu.'),
                         TagsInput::make('customer_terms')
                             ->label('Bahasa awam customer')
                             ->placeholder('modem wifi, modem internet, ...')

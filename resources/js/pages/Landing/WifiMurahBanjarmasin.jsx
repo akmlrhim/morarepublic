@@ -108,10 +108,6 @@ export default function WifiMurahBanjarmasin({ area, product, seo }) {
                         <div>
                             <SectionHeading eyebrow="Produk" title={product.name} description={product.short_description} />
 
-                            {product.price_display ? (
-                                <p className="mt-6 text-lg font-bold text-primary-600">{product.price_display}</p>
-                            ) : null}
-
                             {product.benefits?.length > 0 ? (
                                 <ul className="mt-6 space-y-3">
                                     {product.benefits.map((benefit, index) => (

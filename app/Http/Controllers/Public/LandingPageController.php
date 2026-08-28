@@ -75,7 +75,6 @@ class LandingPageController extends Controller
             'name' => $product->name,
             'slug' => $product->slug,
             'short_description' => $product->short_description,
-            'price_display' => $product->priceDisplay(),
             'image' => SiteConfig::asset($product->image),
             'benefits' => $product->benefits ?? [],
         ];

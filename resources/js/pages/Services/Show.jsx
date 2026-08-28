@@ -10,13 +10,7 @@ export default function ServiceShow({ service, seo }) {
 
     return (
         <PublicLayout seo={seo} transparentNav whatsappContext={{ productId: service.id }}>
-            <PageHeader eyebrow="Layanan" title={service.name} description={service.short_description}>
-                {service.price_display ? (
-                    <p className="mt-6 inline-flex rounded-full bg-white/15 px-5 py-2 text-sm font-semibold text-white">
-                        {service.price_display}
-                    </p>
-                ) : null}
-            </PageHeader>
+            <PageHeader eyebrow="Layanan" title={service.name} description={service.short_description} />
 
             <Section>
                 <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr]">

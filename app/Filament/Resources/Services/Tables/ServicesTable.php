@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Services\Tables;
 
 use App\Enums\PublishStatus;
-use App\Models\Service;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -24,9 +23,6 @@ class ServicesTable
                     ->label('Nama')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('price')
-                    ->label('Harga')
-                    ->state(fn (Service $record) => $record->priceDisplay() ?? 'Belum diatur'),
                 IconColumn::make('is_hero')
                     ->label('Utama')
                     ->boolean(),

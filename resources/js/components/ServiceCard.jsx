@@ -5,12 +5,8 @@ export default function ServiceCard({ service, hidePrice = false }) {
     const hero = service.is_hero;
     const hasPackages = service.packages?.length > 0;
 
-    const priceArea = hidePrice ? (
-        <span />
-    ) : hasPackages ? (
+    const priceArea = !hidePrice && hasPackages ? (
         <PackagePriceList packages={service.packages} tone="light" />
-    ) : service.price_display ? (
-        <span className="text-sm font-semibold text-white">{service.price_display}</span>
     ) : (
         <span />
     );
