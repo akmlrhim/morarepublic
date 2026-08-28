@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\SiteConfig;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -37,7 +38,18 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            //
+            'site' => fn () => SiteConfig::forFrontend(),
+            'flash' => fn () => [
+                'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
+                'coverageResult' => $request->session()->get('coverageResult'),
+            ],
+            'tracking' => fn () => [
+                'search_term' => $request->query('q') ?: $request->query('utm_term'),
+                'utm_source' => $request->query('utm_source'),
+                'utm_medium' => $request->query('utm_medium'),
+                'utm_campaign' => $request->query('utm_campaign'),
+            ],
         ];
     }
 }

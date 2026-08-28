@@ -1,58 +1,71 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Mora Republic
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Website company profile Mora Republic. Spesifikasi produk ada di [PRD.md](PRD.md), panduan desain di [DESIGN.md](DESIGN.md).
 
-## About Laravel
+Stack: Laravel 13, Inertia.js, React 19, Tailwind CSS 4, Filament 5 (CMS), MySQL.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Menjalankan Secara Lokal
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer setup      # install dependency, generate key, migrate, build asset
+php artisan db:seed # isi konten awal dan akun admin
+composer dev        # jalankan server, queue, dan vite bersamaan
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Akun admin bawaan seeder:
 
-## Contributing
+- URL: `/admin`
+- Email: `admin@morarepublic.test`
+- Password: `password`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Ganti password ini sebelum deploy. Hanya user dengan kolom `is_admin` bernilai true yang bisa masuk CMS, dan website ini tidak punya pendaftaran publik.
 
-## Code of Conduct
+## Struktur Halaman
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+| URL                  | Sumber konten                                     |
+| -------------------- | ------------------------------------------------- |
+| `/`                  | Halaman `home` di CMS Halaman, plus layanan dan berita terbaru |
+| `/tentang-kami`      | CMS Halaman                                       |
+| `/layanan`           | CMS Layanan                                       |
+| `/layanan/{slug}`    | CMS Layanan                                       |
+| `/berita`            | CMS Berita                                        |
+| `/berita/{slug}`     | CMS Berita                                        |
+| `/cek-coverage`      | Data area dan status coverage                     |
+| `/faq`               | CMS FAQ                                           |
+| `/kontak`            | CMS Halaman, plus form kontak                     |
+| `/{slug}`            | Halaman statis dulu, lalu landing page dinamis    |
+| `/sitemap.xml`       | Otomatis, termasuk landing page yang published    |
 
-## Security Vulnerabilities
+Slug root dipakai bersama oleh halaman statis dan landing page. Halaman statis selalu menang, dan slug bawaan seperti `layanan` atau `berita` diblokir di form landing page lewat `LandingPage::RESERVED_SLUGS`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Landing Page Dinamis
 
-## License
+Halaman iklan per kombinasi area dan produk dibuat dari CMS, bukan dari kode. Admin mengisi slug, area, produk, headline, benefit, FAQ, keyword, dan meta SEO, lalu halaman langsung tersedia di URL tersebut memakai template `resources/js/pages/LandingPage.jsx`.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Kolom `primary_keyword`, `secondary_keywords`, `customer_terms`, dan `search_term_actual` menggantikan spreadsheet keyword lock. Variasi kata dengan maksud sama dikumpulkan di `customer_terms`, bukan dibuatkan halaman terpisah.
+
+## Import Search Term
+
+Menu **Landing Page > Import Search Term** menerima CSV export Google Search Console. CSV minimal punya kolom `Query` dan `Page` (atau `URL`), opsional `Clicks` dan `Impressions`. Nama kolom bahasa Indonesia juga diterima. Data periode yang sama akan ditimpa, periode lain tetap disimpan.
+
+## Analitik
+
+Dua tabel analitik sengaja tidak menyimpan data pribadi pengunjung:
+
+- `coverage_check_logs`: area yang dicek, jenis layanan, dan hasilnya.
+- `whatsapp_clicks`: halaman, area, produk, search term, dan parameter UTM saat tombol WhatsApp diklik.
+
+## Perintah Lain
+
+```bash
+php artisan test        # jalankan test suite
+./vendor/bin/pint       # rapikan format kode PHP
+npm run build           # build asset produksi
+```
+
+## Catatan Deploy
+
+- Isi `MAIL_*` di `.env` supaya notifikasi form kontak terkirim. Kalau pengiriman email gagal, pesan tetap tersimpan di CMS dan kegagalannya dicatat di log.
+- Isi nomor WhatsApp dan info kontak lewat menu **Pengaturan > Pengaturan Website**. Tombol WhatsApp otomatis disembunyikan kalau nomornya belum diisi.
+- Jalankan `php artisan storage:link` supaya gambar yang diunggah admin bisa diakses publik.
+- Warna di `DESIGN.md` masih hasil estimasi visual. Verifikasi ke brand asset resmi sebelum dikunci.

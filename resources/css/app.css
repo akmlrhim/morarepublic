@@ -3,7 +3,133 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+/* Design token dari DESIGN.md. Nilai warna final perlu diverifikasi ke brand asset resmi. */
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+
+    --color-primary-100: #f0dcee;
+    --color-primary-300: #d98fe0;
+    --color-primary-400: #b94fc7;
+    --color-primary-500: #9c2bb0;
+    --color-primary-600: #6e2aa0;
+    --color-primary-700: #4a1878;
+    --color-primary-900: #2e0f4d;
+
+    --color-ink: #1a0b2e;
+    --color-muted: #6b5a7a;
+    --color-line: #e6d9e8;
+    --color-surface: #faf6fa;
+
+    --color-success: #15803d;
+    --color-warning: #b45309;
+    --color-error: #c0292d;
+
+    --radius-card: 20px;
+    --shadow-card: 0 8px 24px rgba(46, 15, 77, 0.08);
+    --shadow-card-hover: 0 16px 40px rgba(46, 15, 77, 0.16);
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background-color: white;
+        color: var(--color-ink);
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-primary-400);
+        outline-offset: 2px;
+    }
+}
+
+@utility bg-hero-gradient {
+    background: linear-gradient(135deg, #f0dcee 0%, #c77fd1 30%, #9c2bb0 55%, #4a1878 80%, #2e0f4d 100%);
+}
+
+@utility bg-ribbon-gradient {
+    background: linear-gradient(90deg, #d98fe0 0%, #9c2bb0 40%, #4a1878 75%, #2e0f4d 100%);
+}
+
+@utility bg-number-gradient {
+    background: linear-gradient(90deg, #e7b6ec 0%, #c77fd1 45%, #9c2bb0 100%);
+}
+
+@utility text-balance-heading {
+    text-wrap: balance;
+}
+
+/* Isi rich text dari CMS, dirapikan tanpa plugin typography. */
+.prose-cms {
+    color: var(--color-ink);
+    line-height: 1.75;
+}
+
+.prose-cms > * + * {
+    margin-top: 1rem;
+}
+
+.prose-cms h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-top: 2.5rem;
+}
+
+.prose-cms h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.prose-cms p {
+    color: var(--color-muted);
+}
+
+.prose-cms a {
+    color: var(--color-primary-500);
+    text-decoration: underline;
+}
+
+.prose-cms ul,
+.prose-cms ol {
+    padding-inline-start: 1.5rem;
+    color: var(--color-muted);
+}
+
+.prose-cms ul {
+    list-style: disc;
+}
+
+.prose-cms ol {
+    list-style: decimal;
+}
+
+.prose-cms li + li {
+    margin-top: 0.5rem;
+}
+
+.prose-cms img {
+    border-radius: var(--radius-card);
+}
+
+.prose-cms blockquote {
+    border-inline-start: 3px solid var(--color-primary-400);
+    padding-inline-start: 1rem;
+    font-style: italic;
+    color: var(--color-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
 }
