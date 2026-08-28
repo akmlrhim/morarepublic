@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/react';
 import { useState } from 'react';
+import EmptyState from '../../components/EmptyState';
 import PageHeader from '../../components/PageHeader';
 import { Section } from '../../components/Section';
 import PublicLayout from '../../layouts/PublicLayout';
@@ -54,7 +55,10 @@ export default function PackagesIndex({ categories = [], seo }) {
 
                 <div className="mt-10 space-y-12">
                     {visibleCategories.length === 0 ? (
-                        <p className="text-base text-muted">Belum ada paket yang dipublikasikan.</p>
+                        <EmptyState
+                            title="Belum ada paket"
+                            description="Belum ada paket yang dipublikasikan. Begitu ada paket baru, akan langsung muncul di sini."
+                        />
                     ) : (
                         visibleCategories.map((category) => (
                             <div key={category.slug}>

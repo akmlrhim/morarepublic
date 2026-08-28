@@ -2,6 +2,7 @@ import { Link, router } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import ArticleCard from '../../components/ArticleCard';
 import ArticleCardSkeleton from '../../components/ArticleCardSkeleton';
+import EmptyState from '../../components/EmptyState';
 import PageHeader from '../../components/PageHeader';
 import { Section } from '../../components/Section';
 import PublicLayout from '../../layouts/PublicLayout';
@@ -84,7 +85,10 @@ export default function ArticlesIndex({ articles, categories = [], activeCategor
                         ))}
                     </div>
                 ) : (
-                    <p className="text-base text-muted">Belum ada berita untuk filter ini.</p>
+                    <EmptyState
+                        title="Belum ada berita"
+                        description="Belum ada berita untuk filter ini. Begitu ada berita baru, akan langsung muncul di sini."
+                    />
                 )}
 
                 {articles.links?.length > 3 ? (

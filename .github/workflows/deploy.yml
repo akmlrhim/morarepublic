@@ -73,6 +73,8 @@ jobs:
 
               $PHP artisan package:discover --ansi
               $PHP artisan migrate --force
+              $PHP artisan db:seed --class=AdminUserSeeder --force
+              $PHP artisan filament:assets
               $PHP artisan storage:link || true
               chmod -R 775 storage bootstrap/cache
               echo "Setup awal selesai."
@@ -91,6 +93,8 @@ jobs:
 
               $PHP artisan package:discover --ansi
               $PHP artisan migrate --force
+              $PHP artisan db:seed --class=AdminUserSeeder --force
+              $PHP artisan filament:assets
               $PHP artisan optimize:clear
             fi
 

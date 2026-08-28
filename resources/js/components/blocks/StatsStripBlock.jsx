@@ -1,6 +1,6 @@
-import AnimatedNumber from '../AnimatedNumber';
-import Reveal from '../Reveal';
-import { Container } from '../Section';
+import AnimatedNumber from "../AnimatedNumber";
+import Reveal from "../Reveal";
+import { Container } from "../Section";
 
 export default function StatsStripBlock({ data }) {
     const items = data?.items ?? [];
@@ -20,9 +20,11 @@ export default function StatsStripBlock({ data }) {
                                 <AnimatedNumber
                                     value={item.value}
                                     delay={index * 0.15}
-                                    className="block bg-number-gradient bg-clip-text text-[32px] font-extrabold leading-none tabular-nums text-transparent md:text-[44px]"
+                                    className="block text-[32px] font-extrabold leading-none tabular-nums text-white md:text-[44px]"
                                 />
-                                <span className="mt-3 block text-sm text-white/70">{item.label}</span>
+                                <span className="mt-3 block text-sm text-white/70">
+                                    {item.label}
+                                </span>
                             </dd>
                         </Reveal>
                     ))}

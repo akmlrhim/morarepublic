@@ -1,6 +1,6 @@
 import { cx } from '../lib/format';
 
-export const HERO_IMAGE = '/img/hero.webp';
+export const HERO_IMAGE = '/img/hero-home.webp';
 
 /*
  * Scrim dua lapis dipakai di semua hero: lapis multiply menarik foto ke palet ungu

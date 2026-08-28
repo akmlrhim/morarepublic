@@ -7,6 +7,7 @@ import CtaBlock from '../components/blocks/CtaBlock';
 import HeroBlock from '../components/blocks/HeroBlock';
 import StatsStripBlock from '../components/blocks/StatsStripBlock';
 import Button from '../components/Button';
+import HeroBackground from '../components/HeroBackground';
 import Reveal from '../components/Reveal';
 import { Section, SectionHeading } from '../components/Section';
 import ServiceCard from '../components/ServiceCard';
@@ -80,6 +81,7 @@ const HERO = {
         'Layanan FWA dan FTTH dengan jangkauan yang terus bertambah. Cek dulu ketersediaan di area kamu, tim kami siap bantu dari pemasangan sampai perawatan.',
     cta_text: 'Lihat Layanan',
     cta_url: '/#layanan',
+    image: '/img/hero-home.webp',
 };
 
 const STATS_STRIP = {
@@ -140,24 +142,26 @@ export default function Home({ services = [], articles = [], faqs = [], seo }) {
                 </Section>
             ) : null}
 
-            <Section tone="surface">
-                <div className="grid items-center gap-10 lg:grid-cols-2">
-                    <SectionHeading
-                        eyebrow="Cek Coverage"
-                        title="Sudah terjangkau di area kamu?"
-                        description="Masukkan nama kota atau kecamatan kamu, lalu pilih jenis layanan. Hasilnya langsung kelihatan tanpa perlu isi data pribadi."
-                    />
-                    <div className="rounded-[var(--radius-card)] bg-white p-8 shadow-[var(--shadow-card)]">
-                        <p className="text-sm leading-relaxed text-muted">
-                            Kalau area kamu belum tercover, kamu tetap bisa masuk daftar tunggu supaya diprioritaskan
-                            saat jaringan kami masuk ke sana.
+            <section className="relative isolate overflow-hidden py-16 md:py-24">
+                <HeroBackground image="/img/coverage.webp" variant="compact" />
+
+                <div className="relative mx-auto w-full max-w-[1280px] px-6 lg:px-12">
+                    <div className="max-w-xl">
+                        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">Cek Coverage</p>
+                        <h2 className="text-balance-heading mt-3 text-[28px] font-extrabold leading-[1.1] text-white md:text-[40px]">
+                            Sudah terjangkau di area kamu?
+                        </h2>
+                        <p className="mt-4 max-w-md text-sm leading-relaxed text-white/85 md:text-base">
+                            Masukkan nama kota atau kecamatan kamu, lalu pilih jenis layanan. Hasilnya langsung
+                            kelihatan tanpa perlu isi data pribadi. Kalau area kamu belum tercover, kamu tetap bisa
+                            masuk daftar tunggu supaya diprioritaskan saat jaringan kami masuk ke sana.
                         </p>
-                        <Button href="/cek-coverage" className="mt-6">
+                        <Button href="/cek-coverage" variant="outline" size="lg" className="mt-7">
                             Cek Coverage Sekarang
                         </Button>
                     </div>
                 </div>
-            </Section>
+            </section>
 
             {articles.length > 0 ? (
                 <Section>
