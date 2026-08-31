@@ -54,14 +54,16 @@ class PackagesRelationManager extends RelationManager
                 TextInput::make('price')
                     ->label('Harga')
                     ->placeholder('150000')
-                    ->prefix('Rp')
                     ->numeric()
+                    ->live(debounce: 500)
+                    ->hint(fn (?string $state): ?string => filled($state) ? 'Rp '.number_format((int) $state, 0, ',', '.') : null)
                     ->helperText('Kosongkan kalau harga custom atau nego. Ketik angkanya saja, mis. 150000.'),
                 TextInput::make('promo_price')
                     ->label('Harga promo')
                     ->placeholder('99000')
-                    ->prefix('Rp')
                     ->numeric()
+                    ->live(debounce: 500)
+                    ->hint(fn (?string $state): ?string => filled($state) ? 'Rp '.number_format((int) $state, 0, ',', '.') : null)
                     ->helperText('Opsional. Kalau diisi, harga di atas dicoret dan diganti harga promo ini.'),
             ]),
             Repeater::make('features')
