@@ -5,11 +5,19 @@ import { Section, SectionHeading } from '../../components/Section';
 import PublicLayout from '../../layouts/PublicLayout';
 import { useWhatsapp } from '../../lib/useWhatsapp';
 
+function withMessage(waUrl, message) {
+    if (!waUrl) {
+        return waUrl;
+    }
+
+    return `${waUrl.split('?')[0]}?text=${encodeURIComponent(message)}`;
+}
+
 export default function ServiceShow({ service, seo }) {
-    const whatsapp = useWhatsapp({ productId: service.id });
+    const whatsapp = useWhatsapp();
 
     return (
-        <PublicLayout seo={seo} transparentNav whatsappContext={{ productId: service.id }}>
+        <PublicLayout seo={seo} transparentNav>
             <PageHeader eyebrow="Layanan" title={service.name} description={service.short_description} />
 
             <Section>
@@ -46,7 +54,6 @@ export default function ServiceShow({ service, seo }) {
                                         href={whatsapp.url}
                                         target="_blank"
                                         rel="noopener"
-                                        onClick={whatsapp.track}
                                         variant="outline"
                                         size="sm"
                                     >
@@ -76,10 +83,16 @@ export default function ServiceShow({ service, seo }) {
                                 key={pkg.id}
                                 package={pkg}
                                 eyebrow={service.name}
-                                selectHref={whatsapp.available ? whatsapp.url : '/kontak'}
+                                selectHref={
+                                    whatsapp.available
+                                        ? withMessage(
+                                              whatsapp.url,
+                                              `Halo Riqqo, saya mau pilih paket ${pkg.name} (${service.name}).`,
+                                          )
+                                        : '/kontak'
+                                }
                                 selectTarget={whatsapp.available ? '_blank' : undefined}
                                 selectRel={whatsapp.available ? 'noopener' : undefined}
-                                onSelect={whatsapp.available ? whatsapp.track : undefined}
                             />
                         ))}
                     </div>

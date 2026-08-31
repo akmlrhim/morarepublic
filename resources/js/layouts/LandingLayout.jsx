@@ -8,7 +8,7 @@ import WhatsappFloat from '../components/WhatsappFloat';
  * Header cuma logo + CTA, tanpa menu navigasi, supaya pengunjung dari iklan
  * fokus ke satu ajakan bertindak.
  */
-export default function LandingLayout({ seo, whatsappContext, children }) {
+export default function LandingLayout({ seo, children }) {
     const { site } = usePage().props;
 
     return (
@@ -32,14 +32,14 @@ export default function LandingLayout({ seo, whatsappContext, children }) {
                 Lewati ke konten utama
             </a>
 
-            <LandingHeader whatsappContext={whatsappContext} />
+            <LandingHeader />
 
             <main id="konten" className="pt-[76px]">
                 {children}
             </main>
 
             <LandingFooter />
-            <WhatsappFloat context={whatsappContext} />
+            <WhatsappFloat />
         </>
     );
 }

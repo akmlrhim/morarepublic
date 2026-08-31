@@ -82,7 +82,6 @@ export default function Navbar({ transparent = false }) {
                             href={whatsapp.url}
                             target="_blank"
                             rel="noopener"
-                            onClick={whatsapp.track}
                             variant={solid ? 'primary' : 'secondary'}
                             size="sm"
                         >

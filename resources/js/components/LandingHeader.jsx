@@ -4,9 +4,9 @@ import Logo from './Logo';
 import { Container } from './Section';
 import { useWhatsapp } from '../lib/useWhatsapp';
 
-export default function LandingHeader({ whatsappContext }) {
+export default function LandingHeader() {
     const { site } = usePage().props;
-    const whatsapp = useWhatsapp(whatsappContext);
+    const whatsapp = useWhatsapp();
 
     return (
         <header className="fixed inset-x-0 top-0 z-50 bg-white/95 shadow-[0_2px_16px_rgba(46,15,77,0.08)]">
@@ -16,7 +16,7 @@ export default function LandingHeader({ whatsappContext }) {
                 </Link>
 
                 {whatsapp.available ? (
-                    <Button as="a" href={whatsapp.url} target="_blank" rel="noopener" onClick={whatsapp.track} variant="primary" size="sm">
+                    <Button as="a" href={whatsapp.url} target="_blank" rel="noopener" variant="primary" size="sm">
                         Chat WhatsApp
                     </Button>
                 ) : (

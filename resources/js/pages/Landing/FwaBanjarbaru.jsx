@@ -28,15 +28,10 @@ const FAQ_ITEMS = [
 ];
 
 export default function FwaBanjarbaru({ area, product, seo }) {
-    const context = {
-        areaId: area?.id ?? null,
-        productId: product?.id ?? null,
-    };
-
-    const whatsapp = useWhatsapp(context);
+    const whatsapp = useWhatsapp();
 
     const cta = whatsapp.available ? (
-        <Button as="a" href={whatsapp.url} target="_blank" rel="noopener" onClick={whatsapp.track} variant="secondary" size="lg">
+        <Button as="a" href={whatsapp.url} target="_blank" rel="noopener" variant="secondary" size="lg">
             Chat WhatsApp Sekarang
         </Button>
     ) : (
@@ -46,7 +41,7 @@ export default function FwaBanjarbaru({ area, product, seo }) {
     );
 
     return (
-        <LandingLayout seo={seo} whatsappContext={context}>
+        <LandingLayout seo={seo}>
             <section className="relative isolate overflow-hidden bg-primary-900 pb-20 pt-16 md:pb-28 md:pt-24">
                 <HeroBackground priority />
 

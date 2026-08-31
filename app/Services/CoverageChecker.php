@@ -6,12 +6,10 @@ use App\Enums\CoverageStatus;
 use App\Enums\ServiceType;
 use App\Models\Area;
 use App\Models\CoverageArea;
-use App\Models\CoverageCheckLog;
 use Illuminate\Support\Str;
 
 /**
- * Mencocokkan input area dari user ke data coverage, lalu mencatat hasilnya
- * untuk analitik permintaan per wilayah. Tidak menyimpan data pribadi.
+ * Mencocokkan input area dari user ke data coverage.
  */
 class CoverageChecker
 {
@@ -30,13 +28,6 @@ class CoverageChecker
             : null;
 
         $status = $coverage?->status ?? CoverageStatus::Unavailable;
-
-        CoverageCheckLog::create([
-            'area_id' => $area?->id,
-            'service_type' => $serviceType,
-            'result' => $status,
-            'query_text' => Str::limit(trim($query), 190, ''),
-        ]);
 
         return [
             'area' => $area,

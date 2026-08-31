@@ -93,7 +93,6 @@ export default function CoverageResult({ result }) {
                             href={whatsapp.url}
                             target="_blank"
                             rel="noopener"
-                            onClick={whatsapp.track}
                             size="sm"
                         >
                             {result.status === 'available' ? 'Pasang Sekarang' : 'Tanya Tim Kami'}

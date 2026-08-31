@@ -3,7 +3,7 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import WhatsappFloat from '../components/WhatsappFloat';
 
-export default function PublicLayout({ seo, transparentNav = false, whatsappContext, children }) {
+export default function PublicLayout({ seo, transparentNav = false, children }) {
     const { site } = usePage().props;
 
     return (
@@ -34,7 +34,7 @@ export default function PublicLayout({ seo, transparentNav = false, whatsappCont
             </main>
 
             <Footer />
-            <WhatsappFloat context={whatsappContext} />
+            <WhatsappFloat />
         </>
     );
 }

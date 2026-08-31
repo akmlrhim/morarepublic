@@ -21,6 +21,4 @@ it('merender semua halaman panel admin', function (string $url) {
     '/admin/areas/create',
     '/admin/coverage-areas',
     '/admin/coverage-areas/create',
-    '/admin/coverage-check-logs',
-    '/admin/whatsapp-clicks',
 ]);
