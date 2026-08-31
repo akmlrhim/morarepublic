@@ -11,7 +11,6 @@ use Filament\Forms\Components\Toggle;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
-use Filament\Support\RawJs;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -54,25 +53,15 @@ class PackagesRelationManager extends RelationManager
             Grid::make(2)->schema([
                 TextInput::make('price')
                     ->label('Harga')
-                    ->placeholder('150.000')
+                    ->placeholder('150000')
                     ->prefix('Rp')
-                    ->mask(RawJs::make(<<<'JS'
-                        $money($input, ',', '.', 0)
-                        JS))
-                    ->stripCharacters('.')
                     ->numeric()
-                    ->formatStateUsing(fn ($state) => $state !== null ? number_format((int) $state, 0, ',', '.') : null)
-                    ->helperText('Kosongkan kalau harga custom atau nego. Cukup ketik angkanya, mis. 150000, otomatis diformat.'),
+                    ->helperText('Kosongkan kalau harga custom atau nego. Ketik angkanya saja, mis. 150000.'),
                 TextInput::make('promo_price')
                     ->label('Harga promo')
-                    ->placeholder('99.000')
+                    ->placeholder('99000')
                     ->prefix('Rp')
-                    ->mask(RawJs::make(<<<'JS'
-                        $money($input, ',', '.', 0)
-                        JS))
-                    ->stripCharacters('.')
                     ->numeric()
-                    ->formatStateUsing(fn ($state) => $state !== null ? number_format((int) $state, 0, ',', '.') : null)
                     ->helperText('Opsional. Kalau diisi, harga di atas dicoret dan diganti harga promo ini.'),
             ]),
             Repeater::make('features')
