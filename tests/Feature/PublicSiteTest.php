@@ -81,6 +81,6 @@ it('meratakan menu untuk footer tanpa kehilangan halaman', function () {
 it('memakai logo bawaan berwarna dan putih', function () {
     $site = SiteConfig::forFrontend();
 
-    expect($site['logo'])->toBe('/img/logo_colorized.png')
-        ->and($site['logo_light'])->toBe('/img/logo_white.png');
+    expect($site['logo'])->toBe(url('/img/logo_colorized.png'))
+        ->and($site['logo_light'])->toBe(url('/img/logo_white.png'));
 });
