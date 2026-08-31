@@ -20,6 +20,7 @@ class SitemapController extends Controller
             '/cek-coverage' => '0.8',
             '/kontak' => '0.8',
             '/tentang-kami' => '0.7',
+            '/faq' => '0.7',
             '/wifi-murah-banjarmasin' => '0.9',
             '/fwa-banjarbaru' => '0.9',
         ];

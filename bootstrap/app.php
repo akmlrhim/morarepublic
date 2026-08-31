@@ -27,9 +27,17 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
             $status = $response->getStatusCode();
 
-            if (! app()->environment(['local', 'testing'])
-                && in_array($status, [403, 404, 419, 429, 500, 503], true)
-                && ! ($request->is('api/*') || $request->expectsJson())) {
+            if ($request->is('api/*') || $request->expectsJson()) {
+                return $response;
+            }
+
+            // 404 selalu tampil sebagai halaman ramah, termasuk di local, karena bukan bug
+            // yang butuh stack trace. Status lain (mis. 500) tetap pakai halaman debug di
+            // local/testing supaya developer masih bisa lihat error aslinya.
+            $isFriendlyStatus = $status === 404
+                || (! app()->environment(['local', 'testing']) && in_array($status, [403, 419, 429, 500, 503], true));
+
+            if ($isFriendlyStatus) {
                 return Inertia::render('Errors/Error', ['status' => $status])
                     ->toResponse($request)
                     ->setStatusCode($status);

@@ -2,7 +2,6 @@
 
 namespace App\Support;
 
-use App\Models\Setting;
 use Illuminate\Support\Str;
 
 /**
@@ -15,7 +14,7 @@ class Seo
      */
     public static function forPage(?string $title, ?string $description, string $path, ?string $image = null): array
     {
-        $siteName = Setting::get('company_name') ?: config('app.name');
+        $siteName = SiteConfig::companyName();
         $title = trim((string) $title);
 
         return [

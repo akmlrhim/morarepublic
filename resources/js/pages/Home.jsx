@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import Accordion from '../components/Accordion';
 import ArticleCard from '../components/ArticleCard';
 import AdvantagesBlock from '../components/blocks/AdvantagesBlock';
-import CtaBlock from '../components/blocks/CtaBlock';
 import HeroBlock from '../components/blocks/HeroBlock';
 import StatsStripBlock from '../components/blocks/StatsStripBlock';
 import Button from '../components/Button';
@@ -11,6 +10,7 @@ import HeroBackground from '../components/HeroBackground';
 import Reveal from '../components/Reveal';
 import { Section, SectionHeading } from '../components/Section';
 import ServiceCard from '../components/ServiceCard';
+import { FAQ_HIGHLIGHTS } from '../data/faqs';
 import PublicLayout from '../layouts/PublicLayout';
 import { cx, serviceGridColsClass } from '../lib/format';
 
@@ -93,14 +93,7 @@ const STATS_STRIP = {
     ],
 };
 
-const CTA = {
-    heading: 'Siap pasang internet di rumah atau kantor kamu?',
-    description: 'Cek ketersediaan area dulu, lalu tim kami bantu urus sisanya.',
-    button_text: 'Cek Coverage',
-    button_url: '/cek-coverage',
-};
-
-export default function Home({ services = [], articles = [], faqs = [], seo }) {
+export default function Home({ services = [], articles = [], seo }) {
     useEffect(() => {
         const hash = window.location.hash.slice(1);
 
@@ -183,26 +176,25 @@ export default function Home({ services = [], articles = [], faqs = [], seo }) {
                 </Section>
             ) : null}
 
-            {faqs.length > 0 ? (
-                <Section id="faq" tone="surface">
-                    <SectionHeading
-                        eyebrow="Bantuan"
-                        title="Pertanyaan yang Sering Ditanyakan"
-                        description="Kalau jawabannya belum ada di sini, tim kami siap bantu lewat halaman kontak."
-                    />
+            <Section id="faq" tone="surface">
+                <SectionHeading
+                    eyebrow="Bantuan"
+                    title="Pertanyaan yang Sering Ditanyakan"
+                    description="Kalau jawabannya belum ada di sini, cek daftar FAQ lengkap atau tim kami siap bantu lewat halaman kontak."
+                />
 
-                    <Accordion items={faqs} className="mt-10" />
+                <Accordion items={FAQ_HIGHLIGHTS} className="mt-10" />
 
-                    <div className="mt-10 flex flex-wrap items-center gap-4">
-                        <p className="text-sm text-muted">Masih ada yang mau ditanyakan?</p>
-                        <Button href="/kontak" size="sm">
-                            Hubungi Kami
-                        </Button>
-                    </div>
-                </Section>
-            ) : null}
-
-            <CtaBlock data={CTA} />
+                <div className="mt-10 flex flex-wrap items-center gap-4">
+                    <Link href="/faq" className="text-sm font-semibold text-primary-500 hover:underline">
+                        Lihat semua FAQ
+                        <span aria-hidden="true"> &rsaquo;</span>
+                    </Link>
+                    <Button href="/kontak" size="sm">
+                        Hubungi Kami
+                    </Button>
+                </div>
+            </Section>
         </PublicLayout>
     );
 }

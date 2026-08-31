@@ -16,8 +16,6 @@ it('merender semua halaman panel admin', function (string $url) {
     '/admin/articles/create',
     '/admin/categories',
     '/admin/categories/create',
-    '/admin/faqs',
-    '/admin/faqs/create',
     '/admin/contact-submissions',
     '/admin/areas',
     '/admin/areas/create',
@@ -25,5 +23,4 @@ it('merender semua halaman panel admin', function (string $url) {
     '/admin/coverage-areas/create',
     '/admin/coverage-check-logs',
     '/admin/whatsapp-clicks',
-    '/admin/site-settings',
 ]);

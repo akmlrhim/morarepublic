@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
-use App\Models\Faq;
 use App\Models\Service;
 use App\Support\Seo;
 use Inertia\Inertia;
@@ -28,14 +27,9 @@ class HomeController extends Controller
             ->get()
             ->map(fn (Article $article) => ArticleController::toCard($article));
 
-        $faqs = Faq::published()
-            ->orderBy('order')
-            ->get(['question', 'answer']);
-
         return Inertia::render('Home', [
             'services' => $services,
             'articles' => $articles,
-            'faqs' => $faqs,
             'seo' => Seo::forPage(
                 'Internet Cepat dan Stabil untuk Rumah dan Usaha',
                 'Layanan internet FWA dan FTTH dengan jangkauan yang terus bertambah di Kalimantan Selatan. Cek ketersediaan di area kamu.',

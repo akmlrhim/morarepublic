@@ -26,7 +26,10 @@ class PackageController extends Controller
                         'id' => $package->id,
                         'name' => $package->name,
                         'description' => $package->description,
+                        'speed_mbps' => $package->speed_mbps,
+                        'promo_speed_mbps' => $package->promo_speed_mbps,
                         'price_display' => $package->priceDisplay(),
+                        'promo_price_display' => $package->promoPriceDisplay(),
                     ])
                     ->values(),
             ])

@@ -11,8 +11,10 @@ class Package extends Model
         'service_id',
         'name',
         'speed_mbps',
+        'promo_speed_mbps',
         'description',
         'price',
+        'promo_price',
         'features',
         'is_featured',
         'order',
@@ -22,6 +24,7 @@ class Package extends Model
     {
         return [
             'price' => 'decimal:2',
+            'promo_price' => 'decimal:2',
             'features' => 'array',
             'is_featured' => 'boolean',
         ];
@@ -42,5 +45,27 @@ class Package extends Model
         }
 
         return 'Rp '.number_format((float) $this->price, 0, ',', '.');
+    }
+
+    /**
+     * Harga promo siap tampil, mis. "Rp 99.000". Null kalau tidak ada promo.
+     */
+    public function promoPriceDisplay(): ?string
+    {
+        if ($this->promo_price === null) {
+            return null;
+        }
+
+        return 'Rp '.number_format((float) $this->promo_price, 0, ',', '.');
+    }
+
+    public function hasPromoPrice(): bool
+    {
+        return $this->promo_price !== null;
+    }
+
+    public function hasPromoSpeed(): bool
+    {
+        return $this->promo_speed_mbps !== null;
     }
 }

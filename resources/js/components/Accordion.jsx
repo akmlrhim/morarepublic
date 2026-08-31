@@ -2,6 +2,48 @@ import { useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { cx } from '../lib/format';
 
+/**
+ * Pecah teks jawaban jadi blok paragraf dan daftar. Baris yang diawali "• "
+ * dikelompokkan jadi satu <ul><li> supaya poin-poin tampil rapi, bukan cuma
+ * teks bertanda bintik lewat whitespace-pre-line.
+ */
+function renderAnswer(answer) {
+    const blocks = [];
+
+    for (const line of answer.split('\n')) {
+        const isBullet = line.startsWith('• ');
+        const last = blocks[blocks.length - 1];
+
+        if (isBullet) {
+            const text = line.slice(2);
+
+            if (last?.type === 'list') {
+                last.items.push(text);
+            } else {
+                blocks.push({ type: 'list', items: [text] });
+            }
+        } else if (last?.type === 'text') {
+            last.lines.push(line);
+        } else {
+            blocks.push({ type: 'text', lines: [line] });
+        }
+    }
+
+    return blocks.map((block, index) =>
+        block.type === 'list' ? (
+            <ul key={index} className="list-disc space-y-1 pl-5 marker:text-primary-400">
+                {block.items.map((item, itemIndex) => (
+                    <li key={itemIndex}>{item}</li>
+                ))}
+            </ul>
+        ) : (
+            <p key={index} className="whitespace-pre-line">
+                {block.lines.join('\n')}
+            </p>
+        ),
+    );
+}
+
 export default function Accordion({ items = [], className }) {
     const [openIndex, setOpenIndex] = useState(0);
     const reducedMotion = useReducedMotion();
@@ -11,7 +53,7 @@ export default function Accordion({ items = [], className }) {
     }
 
     return (
-        <div className={cx('divide-y divide-line rounded-[var(--radius-card)] border border-line bg-white', className)}>
+        <div className={cx('divide-y divide-line', className)}>
             {items.map((item, index) => {
                 const open = openIndex === index;
 
@@ -23,7 +65,7 @@ export default function Accordion({ items = [], className }) {
                                 onClick={() => setOpenIndex(open ? -1 : index)}
                                 aria-expanded={open}
                                 aria-controls={`faq-panel-${index}`}
-                                className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-base font-semibold text-ink transition hover:text-primary-500"
+                                className="flex w-full items-center justify-between gap-4 py-5 text-left text-base font-semibold text-ink transition hover:text-primary-500"
                             >
                                 {item.question}
                                 <motion.span
@@ -54,9 +96,9 @@ export default function Accordion({ items = [], className }) {
                                     transition={{ duration: reducedMotion ? 0 : 0.25, ease: 'easeInOut' }}
                                     className="overflow-hidden"
                                 >
-                                    <p className="whitespace-pre-line px-6 pb-6 text-sm leading-relaxed text-muted">
-                                        {item.answer}
-                                    </p>
+                                    <div className="space-y-3 pb-6 text-sm leading-relaxed text-muted">
+                                        {renderAnswer(item.answer)}
+                                    </div>
                                 </motion.div>
                             ) : null}
                         </AnimatePresence>

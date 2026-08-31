@@ -4,6 +4,7 @@ use App\Http\Controllers\Public\ArticleController;
 use App\Http\Controllers\Public\CompanyController;
 use App\Http\Controllers\Public\ContactController;
 use App\Http\Controllers\Public\CoverageController;
+use App\Http\Controllers\Public\FaqController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\LandingPageController;
 use App\Http\Controllers\Public\PackageController;
@@ -26,8 +27,8 @@ Route::get('/berita/{article:slug}', [ArticleController::class, 'show'])->name('
 Route::get('/cek-coverage', [CoverageController::class, 'show'])->name('coverage.show');
 Route::post('/cek-coverage', [CoverageController::class, 'check'])->name('coverage.check');
 
-// FAQ dipindah ke beranda (lihat Home.jsx #faq); redirect supaya link lama tidak 404.
-Route::redirect('/faq', '/#faq', 301)->name('faq');
+// Konten FAQ statis di resources/js/data/faqs.js (tanpa database).
+Route::get('/faq', FaqController::class)->name('faq');
 
 Route::get('/kontak', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/kontak', [ContactController::class, 'store'])

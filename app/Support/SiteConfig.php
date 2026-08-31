@@ -2,11 +2,13 @@
 
 namespace App\Support;
 
-use App\Models\Setting;
 use Illuminate\Support\Facades\Storage;
 
 /**
  * Data website yang dipakai di semua halaman publik: identitas, kontak, dan menu.
+ *
+ * Sementara di-hardcode di COMPANY sampai data final dari klien tersedia
+ * (dulu bisa diedit lewat halaman "Pengaturan Website" di admin, sekarang dihapus).
  */
 class SiteConfig
 {
@@ -17,11 +19,40 @@ class SiteConfig
     public const DEFAULT_LOGO_LIGHT = '/img/logo_white.png';
 
     /**
+     * @var array<string, mixed>
+     */
+    private const COMPANY = [
+        'company_name' => 'Mora Republic',
+        'tagline' => 'Internet cepat dan stabil untuk rumah dan usaha di Kalimantan Selatan.',
+        'logo' => null,
+        'logo_light' => null,
+        'whatsapp_number' => '628123456789',
+        'whatsapp_message' => 'Halo, saya mau tanya soal layanan internet Mora Republic.',
+        'phone' => '0511 1234567',
+        'email' => 'halo@morarepublic.test',
+        'notification_email' => 'halo@morarepublic.test',
+        'address' => "Jl. Ahmad Yani KM 5\nBanjarmasin, Kalimantan Selatan 70249",
+        'operating_hours' => 'Senin sampai Jumat, 08.00 sampai 17.00 WITA',
+        'map_embed' => null,
+        'sales_contact_name' => 'Riqqo',
+        'sales_contact_phone' => '0813-4104-187',
+        'sales_contact_role' => 'Sales & Pemasangan',
+        'facebook_url' => null,
+        'instagram_url' => null,
+        'youtube_url' => null,
+    ];
+
+    public static function companyName(): string
+    {
+        return self::COMPANY['company_name'] ?: config('app.name');
+    }
+
+    /**
      * @return array<string, mixed>
      */
     public static function forFrontend(): array
     {
-        $values = Setting::allValues();
+        $values = self::COMPANY;
 
         return [
             'name' => $values['company_name'] ?? config('app.name'),
@@ -104,7 +135,7 @@ class SiteConfig
 
     public static function notificationEmail(): ?string
     {
-        return Setting::get('notification_email') ?: config('mail.from.address');
+        return self::COMPANY['notification_email'] ?: config('mail.from.address');
     }
 
     /**

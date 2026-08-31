@@ -18,7 +18,7 @@ const SOCIAL_ICONS = {
 };
 
 const HELP_LINKS = [
-    { label: "FAQ", href: "/#faq" },
+    { label: "FAQ", href: "/faq" },
     { label: "Blog & Edukasi", href: "/berita" },
     { label: "Kontak", href: "/kontak" },
 ];

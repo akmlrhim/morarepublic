@@ -1,6 +1,5 @@
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import Button from '../../components/Button';
-import Logo from '../../components/Logo';
 
 const CONTENT = {
     403: {
@@ -38,21 +37,10 @@ export default function ErrorPage({ status }) {
 
     return (
         <>
-            <Head title={`${status} — ${info.title}`} />
+            <Head title={`${status} - ${info.title}`} />
 
-            <div className="relative flex min-h-screen flex-col overflow-hidden bg-white">
-                <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-primary-100 opacity-60 blur-3xl"
-                />
-
-                <header className="relative px-6 py-6 lg:px-12">
-                    <Link href="/" className="inline-flex">
-                        <Logo site={site} solid />
-                    </Link>
-                </header>
-
-                <main className="relative flex flex-1 items-center">
+            <div className="flex min-h-screen flex-col bg-white">
+                <main className="flex flex-1 items-center">
                     <div className="mx-auto w-full max-w-[640px] px-6 py-16 text-center lg:px-12">
                         <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-primary-500">
                             Error {status}

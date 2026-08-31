@@ -36,7 +36,14 @@ export default function PackagePriceList({ packages = [], className, triggerLabe
                                 <p className="font-semibold text-ink">{pkg.name}</p>
                                 {pkg.description ? <p className="mt-0.5 text-xs text-muted">{pkg.description}</p> : null}
                             </div>
-                            <span className="shrink-0 font-semibold text-primary-600">{pkg.price_display ?? 'Hubungi kami'}</span>
+                            <span className="shrink-0 text-right">
+                                {pkg.promo_price_display ? (
+                                    <span className="block text-xs font-medium text-muted line-through">{pkg.price_display}</span>
+                                ) : null}
+                                <span className="font-semibold text-primary-600">
+                                    {pkg.promo_price_display ?? pkg.price_display ?? 'Hubungi kami'}
+                                </span>
+                            </span>
                         </li>
                     ))}
                 </ul>

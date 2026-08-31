@@ -83,8 +83,15 @@ export default function PackagesIndex({ categories = [], seo }) {
                                             {pkg.description ? (
                                                 <p className="mt-2 text-sm leading-relaxed text-muted">{pkg.description}</p>
                                             ) : null}
-                                            <p className="mt-4 text-lg font-bold text-primary-600">
-                                                {pkg.price_display ?? 'Hubungi kami'}
+                                            <p className="mt-4">
+                                                {pkg.promo_price_display ? (
+                                                    <span className="mr-2 text-sm font-medium text-muted line-through">
+                                                        {pkg.price_display}
+                                                    </span>
+                                                ) : null}
+                                                <span className="text-lg font-bold text-primary-600">
+                                                    {pkg.promo_price_display ?? pkg.price_display ?? 'Hubungi kami'}
+                                                </span>
                                             </p>
                                         </div>
                                     ))}

@@ -3,7 +3,6 @@
 use App\Enums\PublishStatus;
 use App\Models\Article;
 use App\Models\Service;
-use App\Models\Setting;
 use App\Support\SiteConfig;
 
 it('menampilkan beranda', function () {
@@ -17,6 +16,16 @@ it('menampilkan halaman statis yang hardcode', function () {
 it('menampilkan landing page iklan', function () {
     $this->get('/wifi-murah-banjarmasin')->assertOk();
     $this->get('/fwa-banjarbaru')->assertOk();
+});
+
+it('menampilkan halaman FAQ lengkap', function () {
+    $this->get('/faq')->assertOk();
+});
+
+it('menampilkan halaman error kustom untuk 404', function () {
+    $this->get('/halaman-tidak-ada')
+        ->assertNotFound()
+        ->assertInertia(fn ($page) => $page->component('Errors/Error')->where('status', 404));
 });
 
 it('hanya menampilkan layanan yang published', function () {
@@ -64,21 +73,9 @@ it('meratakan menu untuk footer tanpa kehilangan halaman', function () {
     ]);
 });
 
-it('memakai logo bawaan berwarna dan putih kalau admin belum unggah logo', function () {
+it('memakai logo bawaan berwarna dan putih', function () {
     $site = SiteConfig::forFrontend();
 
     expect($site['logo'])->toBe('/img/logo_colorized.png')
         ->and($site['logo_light'])->toBe('/img/logo_white.png');
-});
-
-it('memakai logo unggahan admin kalau sudah diisi', function () {
-    Setting::putMany([
-        'logo' => 'brand/logo.png',
-        'logo_light' => 'brand/logo-putih.png',
-    ]);
-
-    $site = SiteConfig::forFrontend();
-
-    expect($site['logo'])->toContain('brand/logo.png')
-        ->and($site['logo_light'])->toContain('brand/logo-putih.png');
 });

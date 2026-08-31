@@ -3,12 +3,10 @@
 use App\Enums\SubmissionStatus;
 use App\Mail\ContactSubmissionReceived;
 use App\Models\ContactSubmission;
-use App\Models\Setting;
 use Illuminate\Support\Facades\Mail;
 
 beforeEach(function () {
     Mail::fake();
-    Setting::put('notification_email', 'admin@morarepublic.test');
 });
 
 it('menyimpan pesan dan mengirim notifikasi ke admin', function () {
@@ -23,7 +21,7 @@ it('menyimpan pesan dan mengirim notifikasi ke admin', function () {
     expect($submission->name)->toBe('Budi')
         ->and($submission->status)->toBe(SubmissionStatus::New);
 
-    Mail::assertSent(ContactSubmissionReceived::class, fn ($mail) => $mail->hasTo('admin@morarepublic.test'));
+    Mail::assertSent(ContactSubmissionReceived::class, fn ($mail) => $mail->hasTo('halo@morarepublic.test'));
 });
 
 it('menerima nomor telepon tanpa email', function () {
