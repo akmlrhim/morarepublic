@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Service;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Route;
 
 class SitemapController extends Controller
 {
@@ -14,19 +15,21 @@ class SitemapController extends Controller
         $urls = collect();
 
         $staticPaths = [
-            '/' => '1.0',
-            '/paket-dan-harga' => '0.8',
-            '/berita' => '0.8',
-            '/cek-coverage' => '0.8',
-            '/kontak' => '0.8',
-            '/tentang-kami' => '0.7',
-            '/faq' => '0.7',
-            '/wifi-murah-banjarmasin' => '0.9',
-            '/fwa-banjarbaru' => '0.9',
+            'home' => ['/', '1.0'],
+            'packages.index' => ['/paket-dan-harga', '0.8'],
+            'articles.index' => ['/berita', '0.8'],
+            'coverage.show' => ['/cek-coverage', '0.8'],
+            'contact.show' => ['/kontak', '0.8'],
+            'about' => ['/tentang-kami', '0.7'],
+            'faq' => ['/faq', '0.7'],
+            'landing.wifi-murah-banjarmasin' => ['/wifi-murah-banjarmasin', '0.9'],
+            'landing.fwa-banjarbaru' => ['/fwa-banjarbaru', '0.9'],
         ];
 
-        foreach ($staticPaths as $path => $priority) {
-            $urls->push(['loc' => url($path), 'priority' => $priority]);
+        foreach ($staticPaths as $routeName => [$path, $priority]) {
+            if (Route::has($routeName)) {
+                $urls->push(['loc' => url($path), 'priority' => $priority]);
+            }
         }
 
         Service::published()

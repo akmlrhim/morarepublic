@@ -47,11 +47,16 @@ it('menyembunyikan artikel yang tanggal publishnya belum tiba', function () {
     $this->get('/berita/nanti')->assertNotFound();
 });
 
-it('membuat sitemap yang memuat halaman statis dan landing page', function () {
+it('membuat sitemap yang memuat halaman statis', function () {
     $this->get('/sitemap.xml')
         ->assertOk()
-        ->assertSee(url('/tentang-kami'))
-        ->assertSee(url('/wifi-murah-banjarmasin'));
+        ->assertSee(url('/tentang-kami'));
+});
+
+it('tidak memuat landing page yang rutenya sedang dinonaktifkan', function () {
+    $this->get('/sitemap.xml')
+        ->assertOk()
+        ->assertDontSee(url('/wifi-murah-banjarmasin'));
 });
 
 it('menyusun menu utama jadi lima item', function () {

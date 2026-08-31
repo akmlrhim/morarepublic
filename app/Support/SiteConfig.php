@@ -61,8 +61,8 @@ class SiteConfig
         return [
             'name' => $values['company_name'] ?? config('app.name'),
             'tagline' => $values['tagline'] ?? null,
-            'logo' => self::asset($values['logo'] ?? null) ?? self::DEFAULT_LOGO,
-            'logo_light' => self::asset($values['logo_light'] ?? null) ?? self::DEFAULT_LOGO_LIGHT,
+            'logo' => self::asset($values['logo'] ?? null) ?? url(self::DEFAULT_LOGO),
+            'logo_light' => self::asset($values['logo_light'] ?? null) ?? url(self::DEFAULT_LOGO_LIGHT),
             'whatsapp' => [
                 'number' => $values['whatsapp_number'] ?? null,
                 'url' => self::whatsappUrl($values),

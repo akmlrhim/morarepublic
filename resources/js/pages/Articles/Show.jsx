@@ -1,12 +1,31 @@
-import { Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import ArticleCard from '../../components/ArticleCard';
 import { Container, Section, SectionHeading } from '../../components/Section';
 import PublicLayout from '../../layouts/PublicLayout';
 import { formatDate } from '../../lib/format';
 
 export default function ArticleShow({ article, related = [], seo }) {
+    const { site } = usePage().props;
+
+    const articleJsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: article.title,
+        description: seo?.description ?? undefined,
+        image: article.cover_image ?? seo?.image ?? undefined,
+        datePublished: article.published_at ?? undefined,
+        dateModified: article.published_at ?? undefined,
+        mainEntityOfPage: seo?.canonical,
+        author: { '@type': 'Organization', name: site?.name },
+        publisher: { '@type': 'Organization', name: site?.name, logo: site?.logo },
+    };
+
     return (
         <PublicLayout seo={seo}>
+            <Head>
+                <script type="application/ld+json">{JSON.stringify(articleJsonLd)}</script>
+            </Head>
+
             <article>
                 <Container className="pb-4 pt-12">
                     <nav aria-label="Breadcrumb" className="text-sm text-muted">

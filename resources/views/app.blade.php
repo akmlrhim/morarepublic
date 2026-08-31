@@ -36,12 +36,37 @@
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#9C2BB0">
+  <meta property="og:locale" content="id_ID">
+
+  @if (config('services.google.site_verification'))
+    <meta name="google-site-verification" content="{{ config('services.google.site_verification') }}">
+  @endif
 
   <title inertia>{{ config('app.name', 'Mora Republic') }}</title>
 
   @viteReactRefresh
   @vite(['resources/js/app.jsx'])
   @inertiaHead
+
+  @php($site = \App\Support\SiteConfig::forFrontend())
+  <script type="application/ld+json">
+    {!! json_encode([
+        '@context' => 'https://schema.org',
+        '@type' => 'Organization',
+        'name' => $site['name'],
+        'url' => url('/'),
+        'logo' => $site['logo'],
+        'description' => $site['tagline'],
+        'sameAs' => array_values($site['social']),
+        'contactPoint' => array_filter([
+            '@type' => 'ContactPoint',
+            'telephone' => $site['contact']['phone'],
+            'contactType' => 'customer service',
+            'areaServed' => 'ID',
+            'availableLanguage' => 'Indonesian',
+        ]),
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+  </script>
 </head>
 
 <body class="font-sans antialiased">
