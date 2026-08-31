@@ -20,7 +20,7 @@ export default function StatsStripBlock({ data }) {
                                 <AnimatedNumber
                                     value={item.value}
                                     delay={index * 0.15}
-                                    className="block text-[32px] font-extrabold leading-none tabular-nums text-white md:text-[44px]"
+                                    className="block text-[32px] font-extrabold leading-none text-white md:text-[44px]"
                                 />
                                 <span className="mt-3 block text-sm text-white/70">
                                     {item.label}

@@ -61,7 +61,7 @@ class PackagesRelationManager extends RelationManager
                         JS))
                     ->stripCharacters('.')
                     ->numeric()
-                    ->formatStateUsing(fn ($state) => $state !== null ? (string) (int) $state : null)
+                    ->formatStateUsing(fn ($state) => $state !== null ? number_format((int) $state, 0, ',', '.') : null)
                     ->helperText('Kosongkan kalau harga custom atau nego. Cukup ketik angkanya, mis. 150000, otomatis diformat.'),
                 TextInput::make('promo_price')
                     ->label('Harga promo')
@@ -72,7 +72,7 @@ class PackagesRelationManager extends RelationManager
                         JS))
                     ->stripCharacters('.')
                     ->numeric()
-                    ->formatStateUsing(fn ($state) => $state !== null ? (string) (int) $state : null)
+                    ->formatStateUsing(fn ($state) => $state !== null ? number_format((int) $state, 0, ',', '.') : null)
                     ->helperText('Opsional. Kalau diisi, harga di atas dicoret dan diganti harga promo ini.'),
             ]),
             Repeater::make('features')

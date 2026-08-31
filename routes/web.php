@@ -6,7 +6,7 @@ use App\Http\Controllers\Public\ContactController;
 use App\Http\Controllers\Public\CoverageController;
 use App\Http\Controllers\Public\FaqController;
 use App\Http\Controllers\Public\HomeController;
-use App\Http\Controllers\Public\LandingPageController;
+// use App\Http\Controllers\Public\LandingPageController;
 use App\Http\Controllers\Public\PackageController;
 use App\Http\Controllers\Public\ServiceController;
 use App\Http\Controllers\Public\SitemapController;
@@ -27,7 +27,6 @@ Route::get('/berita/{article:slug}', [ArticleController::class, 'show'])->name('
 Route::get('/cek-coverage', [CoverageController::class, 'show'])->name('coverage.show');
 Route::post('/cek-coverage', [CoverageController::class, 'check'])->name('coverage.check');
 
-// Konten FAQ statis di resources/js/data/faqs.js (tanpa database).
 Route::get('/faq', FaqController::class)->name('faq');
 
 Route::get('/kontak', [ContactController::class, 'show'])->name('contact.show');
@@ -43,16 +42,11 @@ Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 
 Route::get('/robots.txt', function () {
     return response(
-        "User-agent: *\nDisallow: /admin\nDisallow: /livewire\n\nSitemap: ".url('/sitemap.xml')."\n"
+        "User-agent: *\nDisallow: /admin\nDisallow: /livewire\n\nSitemap: " . url('/sitemap.xml') . "\n"
     )->header('Content-Type', 'text/plain');
 })->name('robots');
 
-/*
- * Landing page iklan. Kontennya hardcode (lihat LandingPageController dan
- * resources/js/pages/Landing), tambahkan baris baru di sini setiap kali ada
- * landing page baru.
- */
-Route::get('/wifi-murah-banjarmasin', [LandingPageController::class, 'wifiMurahBanjarmasin'])
-    ->name('landing.wifi-murah-banjarmasin');
-Route::get('/fwa-banjarbaru', [LandingPageController::class, 'fwaBanjarbaru'])
-    ->name('landing.fwa-banjarbaru');
+// Route::get('/wifi-murah-banjarmasin', [LandingPageController::class, 'wifiMurahBanjarmasin'])
+//     ->name('landing.wifi-murah-banjarmasin');
+// Route::get('/fwa-banjarbaru', [LandingPageController::class, 'fwaBanjarbaru'])
+//     ->name('landing.fwa-banjarbaru');
