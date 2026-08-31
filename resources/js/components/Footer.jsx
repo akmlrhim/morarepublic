@@ -1,7 +1,6 @@
 import { Link, usePage } from "@inertiajs/react";
 import FacebookIcon from "./icons/FacebookIcon";
 import InstagramIcon from "./icons/InstagramIcon";
-import WhatsappIcon from "./icons/WhatsappIcon";
 import YoutubeIcon from "./icons/YoutubeIcon";
 import { Container } from "./Section";
 
@@ -25,14 +24,12 @@ const HELP_LINKS = [
 
 export default function Footer() {
     const { site } = usePage().props;
-    const contact = site?.contact ?? {};
     const social = site?.social ?? {};
-    const salesContact = site?.sales_contact;
 
     return (
         <footer className="bg-primary-900 text-white">
             <Container className="py-14 md:py-20">
-                <div className="grid gap-10 md:grid-cols-3">
+                <div className="grid gap-10 md:grid-cols-2">
                     <div>
                         {site?.logo_light ? (
                             <img
@@ -104,59 +101,6 @@ export default function Footer() {
                                     </li>
                                 ),
                             )}
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-primary-300">
-                            Kontak Utama
-                        </h2>
-
-                        {salesContact ? (
-                            <div className="mt-4 flex gap-3">
-                                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/10 text-primary-300">
-                                    <WhatsappIcon className="h-4 w-4" />
-                                </span>
-                                <p className="text-sm leading-relaxed">
-                                    {salesContact.name ? (
-                                        <span className="block font-semibold text-white">
-                                            {salesContact.name}
-                                        </span>
-                                    ) : null}
-                                    {salesContact.phone ? (
-                                        <a
-                                            href={`tel:${salesContact.phone.replace(/[^0-9+]/g, "")}`}
-                                            className="font-semibold text-white transition hover:text-primary-300"
-                                        >
-                                            {salesContact.phone}
-                                        </a>
-                                    ) : null}
-                                    {salesContact.role ? (
-                                        <span className="block text-white/60">
-                                            {salesContact.role}
-                                        </span>
-                                    ) : null}
-                                </p>
-                            </div>
-                        ) : null}
-
-                        <ul className="mt-4 space-y-3 text-sm text-white/75">
-                            {contact.address ? (
-                                <li className="whitespace-pre-line">
-                                    {contact.address}
-                                </li>
-                            ) : null}
-                            {contact.hours ? <li>{contact.hours}</li> : null}
-                            {contact.email ? (
-                                <li>
-                                    <a
-                                        href={`mailto:${contact.email}`}
-                                        className="transition hover:text-white"
-                                    >
-                                        {contact.email}
-                                    </a>
-                                </li>
-                            ) : null}
                         </ul>
                     </div>
                 </div>

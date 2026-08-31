@@ -1,20 +1,20 @@
-import { usePage } from '@inertiajs/react';
-import ContactForm from '../components/ContactForm';
-import PageHeader from '../components/PageHeader';
-import { Container } from '../components/Section';
-import PublicLayout from '../layouts/PublicLayout';
-import ContactInfoBlock from '../components/blocks/ContactInfoBlock';
+import { usePage } from "@inertiajs/react";
+import ContactForm from "../components/ContactForm";
+import PageHeader from "../components/PageHeader";
+import { Container } from "../components/Section";
+import PublicLayout from "../layouts/PublicLayout";
+import ContactInfoBlock from "../components/blocks/ContactInfoBlock";
 
 export default function Contact({ seo }) {
     const { site } = usePage().props;
 
     const contactInfo = {
-        heading: 'Kantor Kami',
+        heading: "Kontak Kami",
         address: site?.contact?.address,
         hours: site?.contact?.hours,
-        phone: site?.contact?.phone,
         email: site?.contact?.email,
         map_embed: site?.contact?.map_embed,
+        sales_contacts: site?.sales_contacts,
     };
 
     return (

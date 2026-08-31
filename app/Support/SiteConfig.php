@@ -29,14 +29,18 @@ class SiteConfig
         'whatsapp_number' => '628123456789',
         'whatsapp_message' => 'Halo, saya mau tanya soal layanan internet Mora Republic.',
         'phone' => '0511 1234567',
-        'email' => 'halo@morarepublic.test',
+        'email' => null,
         'notification_email' => 'halo@morarepublic.test',
-        'address' => "Jl. Ahmad Yani KM 5\nBanjarmasin, Kalimantan Selatan 70249",
-        'operating_hours' => 'Senin sampai Jumat, 08.00 sampai 17.00 WITA',
+        'address' => null,
+        'operating_hours' => null,
         'map_embed' => null,
-        'sales_contact_name' => 'Riqqo',
-        'sales_contact_phone' => '0813-4104-187',
-        'sales_contact_role' => 'Sales & Pemasangan',
+        'sales_contacts' => [
+            ['name' => 'Riqqo', 'phone' => '0813-4104-187', 'role' => 'Sales & Pemasangan'],
+            ['name' => 'Cs Putri', 'phone' => '0851-5106-6572', 'role' => 'Customer Service'],
+            ['name' => 'Cs Clara', 'phone' => '0851-1361-8632', 'role' => 'Customer Service'],
+            ['name' => 'Rina', 'phone' => '0851-1361-8625', 'role' => 'Customer Service'],
+            ['name' => 'MyRepublic Indonesia', 'phone' => '0889-8150-0818', 'role' => 'Pusat Bantuan'],
+        ],
         'facebook_url' => null,
         'instagram_url' => null,
         'youtube_url' => null,
@@ -70,11 +74,10 @@ class SiteConfig
                 'hours' => $values['operating_hours'] ?? null,
                 'map_embed' => $values['map_embed'] ?? null,
             ],
-            'sales_contact' => array_filter([
-                'name' => $values['sales_contact_name'] ?? null,
-                'phone' => $values['sales_contact_phone'] ?? null,
-                'role' => $values['sales_contact_role'] ?? null,
-            ]) ?: null,
+            'sales_contacts' => array_map(
+                fn (array $person) => $person + ['whatsapp_url' => self::contactWhatsappUrl($person)],
+                $values['sales_contacts'] ?? [],
+            ),
             'social' => array_filter([
                 'facebook' => $values['facebook_url'] ?? null,
                 'instagram' => $values['instagram_url'] ?? null,
@@ -152,5 +155,18 @@ class SiteConfig
         $message = $values['whatsapp_message'] ?? null;
 
         return 'https://wa.me/'.$number.(filled($message) ? '?text='.rawurlencode($message) : '');
+    }
+
+    /**
+     * @param  array{name: string, phone: string, role?: string}  $person
+     */
+    private static function contactWhatsappUrl(array $person): string
+    {
+        $number = preg_replace('/[^0-9]/', '', $person['phone']);
+        $number = str_starts_with($number, '0') ? '62'.substr($number, 1) : $number;
+
+        $message = "Halo {$person['name']}, saya mau tanya soal layanan internet Mora Republic.";
+
+        return 'https://wa.me/'.$number.'?text='.rawurlencode($message);
     }
 }
