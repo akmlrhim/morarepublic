@@ -13,7 +13,7 @@ class FaqController extends Controller
     {
         return Inertia::render('Faq/Index', [
             'seo' => Seo::forPage(
-                'Pertanyaan yang Sering Ditanyakan (FAQ)',
+                'FAQ',
                 'Jawaban lengkap seputar harga, tagihan, modem, coverage, hingga perbandingan FWA dan FTTH.',
                 '/faq',
             ),

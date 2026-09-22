@@ -26,7 +26,7 @@ export default function EmptyState({
             </svg>
 
             <p className="mt-5 text-base font-semibold text-ink">{title}</p>
-            <p className="mt-1 max-w-xs text-sm text-muted">{description}</p>
+            <p className="mt-1 max-w-xs text-sm text-ink">{description}</p>
         </div>
     );
 }

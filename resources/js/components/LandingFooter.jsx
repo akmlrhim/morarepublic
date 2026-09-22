@@ -7,7 +7,7 @@ export default function LandingFooter() {
 
     return (
         <footer className="border-t border-line bg-white">
-            <Container className="flex flex-col gap-3 py-8 text-sm text-muted md:flex-row md:items-center md:justify-between">
+            <Container className="flex flex-col gap-3 py-8 text-sm text-ink md:flex-row md:items-center md:justify-between">
                 <p>
                     &copy; {new Date().getFullYear()} {site?.name ?? 'Mora Republic'}. Seluruh hak cipta dilindungi.
                 </p>

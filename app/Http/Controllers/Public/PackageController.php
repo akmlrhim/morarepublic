@@ -39,7 +39,7 @@ class PackageController extends Controller
         return Inertia::render('Packages/Index', [
             'categories' => $categories,
             'seo' => Seo::forPage(
-                'Daftar Paket dan Harga',
+                'Paket & Harga',
                 'Semua paket dan harga layanan internet kami, bisa difilter berdasarkan jenis layanan.',
                 '/paket-dan-harga',
             ),

@@ -53,7 +53,7 @@ export default function ErrorPage({ status }) {
                         <h1 className="mt-2 text-2xl font-bold text-ink md:text-3xl">
                             {info.title}
                         </h1>
-                        <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted">
+                        <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-ink">
                             {info.description}
                         </p>
 
@@ -68,7 +68,7 @@ export default function ErrorPage({ status }) {
                     </div>
                 </main>
 
-                <footer className="relative px-6 py-6 text-center text-sm text-muted lg:px-12">
+                <footer className="relative px-6 py-6 text-center text-sm text-ink lg:px-12">
                     &copy; {new Date().getFullYear()}{" "}
                     {site?.name ?? "Mora Republic"}. Seluruh hak cipta
                     dilindungi.

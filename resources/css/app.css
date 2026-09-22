@@ -31,7 +31,7 @@
 
 @layer base {
     html {
-        scroll-behavior: smooth;
+        scroll-behavior: auto;
     }
 
     body {
@@ -84,7 +84,7 @@
 }
 
 .prose-cms p {
-    color: var(--color-muted);
+    color: var(--color-ink);
 }
 
 .prose-cms a {
@@ -95,7 +95,7 @@
 .prose-cms ul,
 .prose-cms ol {
     padding-inline-start: 1.5rem;
-    color: var(--color-muted);
+    color: var(--color-ink);
 }
 
 .prose-cms ul {
@@ -118,7 +118,7 @@
     border-inline-start: 3px solid var(--color-primary-400);
     padding-inline-start: 1rem;
     font-style: italic;
-    color: var(--color-muted);
+    color: var(--color-ink);
 }
 
 @media (prefers-reduced-motion: reduce) {

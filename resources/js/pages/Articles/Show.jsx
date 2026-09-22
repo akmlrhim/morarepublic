@@ -16,7 +16,9 @@ export default function ArticleShow({ article, related = [], seo }) {
         datePublished: article.published_at ?? undefined,
         dateModified: article.published_at ?? undefined,
         mainEntityOfPage: seo?.canonical,
-        author: { '@type': 'Organization', name: site?.name },
+        author: article.author_name
+            ? { '@type': 'Person', name: article.author_name }
+            : { '@type': 'Organization', name: site?.name },
         publisher: { '@type': 'Organization', name: site?.name, logo: site?.logo },
     };
 
@@ -28,9 +30,9 @@ export default function ArticleShow({ article, related = [], seo }) {
 
             <article>
                 <Container className="pb-4 pt-12">
-                    <nav aria-label="Breadcrumb" className="text-sm text-muted">
-                        <Link href="/berita" className="transition hover:text-primary-500">
-                            Berita
+                    <nav aria-label="Breadcrumb" className="text-sm text-ink">
+                        <Link href="/artikel" className="transition hover:text-primary-500">
+                            Artikel
                         </Link>
                         {article.category ? (
                             <>
@@ -38,7 +40,7 @@ export default function ArticleShow({ article, related = [], seo }) {
                                     /
                                 </span>
                                 <Link
-                                    href={`/berita?kategori=${article.category.slug}`}
+                                    href={`/artikel?kategori=${article.category.slug}`}
                                     className="transition hover:text-primary-500"
                                 >
                                     {article.category.name}
@@ -49,13 +51,25 @@ export default function ArticleShow({ article, related = [], seo }) {
 
                     <h1 className="text-balance-heading mt-6 max-w-4xl text-[30px] font-extrabold leading-tight text-ink md:text-[44px]">
                         {article.title}
-                    </h1>
+                     </h1>
 
-                    {article.published_at ? (
-                        <p className="mt-4 text-sm text-muted">
-                            Dipublikasikan <time dateTime={article.published_at}>{formatDate(article.published_at)}</time>
-                        </p>
-                    ) : null}
+                    <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-ink">
+                        {article.published_at ? (
+                            <span>
+                                Dipublikasikan <time dateTime={article.published_at}>{formatDate(article.published_at)}</time>
+                            </span>
+                        ) : null}
+                        {article.author_name ? (
+                            <>
+                                <span aria-hidden="true" className="text-xs">
+                                    •
+                                </span>
+                                <span>
+                                    Oleh <span className="font-medium text-ink">{article.author_name}</span>
+                                </span>
+                            </>
+                        ) : null}
+                    </div>
                 </Container>
 
                 {article.cover_image ? (
@@ -78,7 +92,7 @@ export default function ArticleShow({ article, related = [], seo }) {
 
             {related.length > 0 ? (
                 <Section tone="surface">
-                    <SectionHeading eyebrow="Berita Lain" title="Baca juga" />
+                    <SectionHeading eyebrow="Artikel Lain" title="Baca juga" />
                     <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                         {related.map((item) => (
                             <ArticleCard key={item.slug} article={item} />

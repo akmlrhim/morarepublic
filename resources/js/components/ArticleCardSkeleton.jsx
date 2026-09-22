@@ -9,9 +9,12 @@ export default function ArticleCardSkeleton() {
             <Skeleton className="h-48 w-full rounded-none" />
 
             <div className="flex flex-1 flex-col p-7">
-                <div className="flex items-center gap-3">
-                    <Skeleton className="h-6 w-20 rounded-full" />
-                    <Skeleton className="h-4 w-24" />
+                <div className="flex flex-col gap-2">
+                    <Skeleton className="h-7 w-20 rounded-full" />
+                    <div className="flex items-center gap-3">
+                        <Skeleton className="h-4 w-24" />
+                        <Skeleton className="h-4 w-20" />
+                    </div>
                 </div>
 
                 <Skeleton className="mt-4 h-5 w-full" />

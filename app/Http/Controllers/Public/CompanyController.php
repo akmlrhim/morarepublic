@@ -13,7 +13,7 @@ class CompanyController extends Controller
     {
         return Inertia::render('AboutUs', [
             'seo' => Seo::forPage(
-                'Tentang Mora Republic',
+                'Tentang',
                 'Visi, misi, dan komitmen Mora Republic dalam membangun infrastruktur dan layanan digital yang menjangkau seluruh negeri.',
                 '/tentang-kami',
             ),

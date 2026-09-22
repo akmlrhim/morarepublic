@@ -21,17 +21,17 @@ export default function ArticlesIndex({ articles, categories = [], activeCategor
         };
     }, []);
 
-    function filterBy(slug) {
-        router.get('/berita', slug ? { kategori: slug } : {}, {
-            preserveScroll: true,
-            preserveState: true,
-        });
-    }
+     function filterBy(slug) {
+         router.get('/artikel', slug ? { kategori: slug } : {}, {
+             preserveScroll: true,
+             preserveState: true,
+         });
+     }
 
     return (
         <PublicLayout seo={seo} transparentNav>
             <PageHeader
-                eyebrow="Berita"
+                eyebrow="Artikel"
                 title="Kabar dan Artikel"
                 description="Pengumuman layanan, tips internet, dan cerita dari lapangan."
             />
@@ -47,7 +47,7 @@ export default function ArticlesIndex({ articles, categories = [], activeCategor
                                 'rounded-full px-4 py-2 text-sm font-semibold transition',
                                 !activeCategory
                                     ? 'bg-primary-500 text-white'
-                                    : 'border border-line text-muted hover:text-primary-500',
+                                    : 'border border-line text-ink hover:text-primary-500',
                             )}
                         >
                             Semua
@@ -62,7 +62,7 @@ export default function ArticlesIndex({ articles, categories = [], activeCategor
                                     'rounded-full px-4 py-2 text-sm font-semibold transition',
                                     activeCategory === category.slug
                                         ? 'bg-primary-500 text-white'
-                                        : 'border border-line text-muted hover:text-primary-500',
+                                        : 'border border-line text-ink hover:text-primary-500',
                                 )}
                             >
                                 {category.name}
@@ -73,21 +73,21 @@ export default function ArticlesIndex({ articles, categories = [], activeCategor
 
                 {loading ? (
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3" aria-busy="true">
-                        <span className="sr-only">Memuat berita...</span>
+                        <span className="sr-only">Memuat artikel...</span>
                         {Array.from({ length: 6 }).map((_, index) => (
                             <ArticleCardSkeleton key={index} />
                         ))}
                     </div>
                 ) : articles.data.length > 0 ? (
-                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                         {articles.data.map((article) => (
                             <ArticleCard key={article.slug} article={article} />
                         ))}
                     </div>
                 ) : (
                     <EmptyState
-                        title="Belum ada berita"
-                        description="Belum ada berita untuk filter ini. Begitu ada berita baru, akan langsung muncul di sini."
+                        title="Belum ada artikel"
+                        description="Belum ada artikel untuk filter ini. Begitu ada artikel baru, akan langsung muncul di sini."
                     />
                 )}
 
@@ -103,14 +103,14 @@ export default function ArticlesIndex({ articles, categories = [], activeCategor
                                         'rounded-full px-4 py-2 text-sm font-semibold transition',
                                         link.active
                                             ? 'bg-primary-500 text-white'
-                                            : 'border border-line text-muted hover:text-primary-500',
+                                            : 'border border-line text-ink hover:text-primary-500',
                                     )}
                                     dangerouslySetInnerHTML={{ __html: link.label }}
                                 />
                             ) : (
                                 <span
                                     key={index}
-                                    className="rounded-full px-4 py-2 text-sm font-semibold text-muted/50"
+                                    className="rounded-full px-4 py-2 text-sm font-semibold text-ink/50"
                                     dangerouslySetInnerHTML={{ __html: link.label }}
                                 />
                             ),

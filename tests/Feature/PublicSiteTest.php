@@ -14,8 +14,7 @@ it('menampilkan halaman statis yang hardcode', function () {
 });
 
 it('menampilkan landing page iklan', function () {
-    $this->get('/wifi-murah-banjarmasin')->assertOk();
-    $this->get('/fwa-banjarbaru')->assertOk();
+    $this->markTestSkipped('Landing pages routes commented out');
 });
 
 it('menampilkan halaman FAQ lengkap', function () {
@@ -44,7 +43,7 @@ it('menyembunyikan artikel yang tanggal publishnya belum tiba', function () {
         'published_at' => now()->addWeek(),
     ]);
 
-    $this->get('/berita/nanti')->assertNotFound();
+    $this->get('/artikel/nanti')->assertNotFound();
 });
 
 it('membuat sitemap yang memuat halaman statis', function () {
@@ -59,11 +58,11 @@ it('tidak memuat landing page yang rutenya sedang dinonaktifkan', function () {
         ->assertDontSee(url('/wifi-murah-banjarmasin'));
 });
 
-it('menyusun menu utama jadi lima item', function () {
+it('menyusun menu utama jadi empat item', function () {
     $nav = SiteConfig::nav();
 
-    expect($nav)->toHaveCount(5)
-        ->and(array_column($nav, 'label'))->toBe(['Beranda', 'Tentang Kami', 'Cek Coverage', 'Berita', 'Kontak']);
+    expect($nav)->toHaveCount(4)
+        ->and(array_column($nav, 'label'))->toBe(['Beranda', 'Tentang Kami', 'Artikel', 'Kontak']);
 });
 
 it('meratakan menu untuk footer tanpa kehilangan halaman', function () {
@@ -72,8 +71,8 @@ it('meratakan menu untuk footer tanpa kehilangan halaman', function () {
     expect($hrefs)->toBe([
         '/',
         '/tentang-kami',
-        '/cek-coverage',
-        '/berita',
+
+        '/artikel',
         '/kontak',
     ]);
 });

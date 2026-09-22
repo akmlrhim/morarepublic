@@ -81,11 +81,11 @@ export default function PackagesIndex({ categories = [], seo }) {
                                         >
                                             <h3 className="text-lg font-semibold text-ink">{pkg.name}</h3>
                                             {pkg.description ? (
-                                                <p className="mt-2 text-sm leading-relaxed text-muted">{pkg.description}</p>
+                                                <p className="mt-2 text-sm leading-relaxed text-ink">{pkg.description}</p>
                                             ) : null}
                                             <p className="mt-4">
                                                 {pkg.promo_price_display ? (
-                                                    <span className="mr-2 text-sm font-medium text-muted line-through">
+                                                    <span className="mr-2 text-sm font-medium text-ink line-through">
                                                         {pkg.price_display}
                                                     </span>
                                                 ) : null}

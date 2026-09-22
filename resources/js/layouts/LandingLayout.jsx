@@ -16,6 +16,7 @@ export default function LandingLayout({ seo, children }) {
             <Head>
                 <title>{seo?.title ?? site?.name ?? 'Mora Republic'}</title>
                 {seo?.description ? <meta name="description" content={seo.description} /> : null}
+                {seo?.keywords ? <meta name="keywords" content={seo.keywords} /> : null}
                 {seo?.canonical ? <link rel="canonical" href={seo.canonical} /> : null}
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content={seo?.title ?? site?.name ?? ''} />

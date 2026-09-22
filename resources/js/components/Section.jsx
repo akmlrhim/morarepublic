@@ -38,7 +38,7 @@ export function SectionHeading({ eyebrow, title, description, align = 'left', to
                 </h2>
             ) : null}
             {description ? (
-                <p className={cx('mt-4 text-base leading-relaxed', tone === 'dark' ? 'text-white/70' : 'text-muted')}>
+                <p className={cx('mt-4 text-base leading-relaxed', tone === 'dark' ? 'text-white/70' : 'text-ink')}>
                     {description}
                 </p>
             ) : null}

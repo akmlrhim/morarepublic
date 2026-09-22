@@ -56,7 +56,7 @@ export default function MobileNav({ nav, currentPath, onNavigate }) {
                                             <Link
                                                 href={child.href}
                                                 onClick={onNavigate}
-                                                className="block rounded-xl px-3 py-2.5 text-sm font-medium text-muted transition hover:text-primary-500"
+                                                className="block rounded-xl px-3 py-2.5 text-sm font-medium text-ink transition hover:text-primary-500"
                                                 aria-current={isActivePath(child.href, currentPath) ? 'page' : undefined}
                                             >
                                                 {child.label}

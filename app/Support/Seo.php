@@ -10,18 +10,19 @@ class Seo
     public const DEFAULT_IMAGE = '/img/hero-home.webp';
 
     /**
-     * @return array{title: string, description: ?string, canonical: string, image: ?string}
+     * @return array{title: string, description: ?string, canonical: string, image: ?string, keywords: ?string}
      */
-    public static function forPage(?string $title, ?string $description, string $path, ?string $image = null): array
+    public static function forPage(?string $title, ?string $description, string $path, ?string $image = null, ?string $keywords = null): array
     {
         $siteName = SiteConfig::companyName();
         $title = trim((string) $title);
 
         return [
-            'title' => $title === '' ? $siteName : $title . ' | ' . $siteName,
+            'title' => $title === '' ? $siteName : $title.' | '.$siteName,
             'description' => self::trim($description),
             'canonical' => url($path),
             'image' => SiteConfig::asset($image) ?? url(self::DEFAULT_IMAGE),
+            'keywords' => $keywords,
         ];
     }
 

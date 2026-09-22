@@ -99,8 +99,8 @@ class SiteConfig
         return [
             ['label' => 'Beranda', 'href' => '/'],
             ['label' => 'Tentang Kami', 'href' => '/tentang-kami'],
-            ['label' => 'Cek Coverage', 'href' => '/cek-coverage'],
-            ['label' => 'Berita', 'href' => '/berita'],
+            ['label' => 'Artikel', 'href' => '/artikel'],
+            ['label' => 'Coverage Area', 'href' => '/coverage-area'],
             ['label' => 'Kontak', 'href' => '/kontak'],
         ];
     }

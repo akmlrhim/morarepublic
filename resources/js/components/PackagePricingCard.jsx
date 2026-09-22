@@ -32,14 +32,14 @@ export default function PackagePricingCard({
             {pkg.speed_mbps ? (
                 <div className="mt-4 flex items-end gap-2">
                     {pkg.promo_speed_mbps ? (
-                        <span className="mb-1 text-lg font-semibold leading-none text-muted line-through">
+                        <span className="mb-1 text-lg font-semibold leading-none text-ink line-through">
                             {pkg.speed_mbps}
                         </span>
                     ) : null}
                     <span className="text-4xl font-extrabold leading-none text-ink">
                         {pkg.promo_speed_mbps ?? pkg.speed_mbps}
                     </span>
-                    <span className="mb-0.5 flex flex-col text-xs leading-tight text-muted">
+                    <span className="mb-0.5 flex flex-col text-xs leading-tight text-ink">
                         <span>Mbps</span>
                         <span>up-to</span>
                     </span>
@@ -48,15 +48,15 @@ export default function PackagePricingCard({
 
             <p className="mt-3">
                 {pkg.promo_price_display ? (
-                    <span className="mr-2 text-sm font-medium text-muted line-through">{pkg.price_display}</span>
+                    <span className="mr-2 text-sm font-medium text-ink line-through">{pkg.price_display}</span>
                 ) : null}
                 <span className="text-xl font-bold text-primary-600">
                     {pkg.promo_price_display ?? pkg.price_display ?? 'Hubungi kami'}
                 </span>
-                {pkg.has_price ? <span className="text-sm font-medium text-muted"> /bulan*</span> : null}
+                {pkg.has_price ? <span className="text-sm font-medium text-ink"> /bulan*</span> : null}
             </p>
 
-            {pkg.description ? <p className="mt-2 text-sm leading-relaxed text-muted">{pkg.description}</p> : null}
+            {pkg.description ? <p className="mt-2 text-sm leading-relaxed text-ink">{pkg.description}</p> : null}
 
             {pkg.features?.length > 0 ? (
                 <ul className="mt-5 space-y-2.5 border-t border-line pt-5">

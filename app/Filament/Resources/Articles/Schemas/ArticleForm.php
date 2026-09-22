@@ -27,6 +27,9 @@ class ArticleForm
                             ->label('Judul')
                             ->placeholder('Judul artikel')
                             ->required(),
+                        TextInput::make('author_name')
+                            ->label('Nama Penulis')
+                            ->placeholder('Contoh: Budi'),
                         Select::make('category_id')
                             ->label('Kategori')
                             ->placeholder('Pilih kategori')
@@ -62,7 +65,30 @@ class ArticleForm
                             ->label('Isi artikel')
                             ->placeholder('Tulis isi artikel di sini...')
                             ->required()
+                            ->fileAttachmentsDisk('public')
+                            ->fileAttachmentsDirectory('articles/content')
+                            ->fileAttachmentsVisibility('public')
                             ->columnSpanFull(),
+                    ]),
+
+                Section::make('SEO & Meta')
+                    ->collapsed()
+                    ->columns(1)
+                    ->schema([
+                        TextInput::make('meta_title')
+                            ->label('Meta Title')
+                            ->placeholder('Kosongkan untuk otomatis dari judul')
+                            ->maxLength(70),
+                        Textarea::make('meta_description')
+                            ->label('Meta Description')
+                            ->placeholder('Kosongkan untuk otomatis dari ringkasan / isi')
+                            ->rows(2)
+                            ->maxLength(160),
+                        TextInput::make('meta_keywords')
+                            ->label('Meta Keywords')
+                            ->placeholder('Contoh: router, wifi, sinyal, tips internet')
+                            ->helperText('Pisahkan dengan koma, max 5-7 keywords')
+                            ->maxLength(200),
                     ]),
 
                 Section::make('Publikasi')

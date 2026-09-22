@@ -11,27 +11,32 @@ export default function ArticleCard({ article }) {
             )}
 
             <div className="flex flex-1 flex-col p-7">
-                <div className="flex flex-wrap items-center gap-3 text-[13px] font-medium text-muted">
+                <div className="flex flex-col gap-2">
                     {article.category ? (
-                        <span className="rounded-full bg-primary-100 px-3 py-1 font-semibold text-primary-600">
-                            {article.category.name}
-                        </span>
+                        <div>
+                            <span className="inline-block rounded-full bg-primary-100 px-3 py-1 text-[13px] font-semibold text-primary-600">
+                                {article.category.name}
+                            </span>
+                        </div>
                     ) : null}
-                    {article.published_at ? <time dateTime={article.published_at}>{formatDate(article.published_at)}</time> : null}
+                    <div className="flex flex-wrap items-center gap-3 text-[13px] font-medium text-ink">
+                        {article.published_at ? <time dateTime={article.published_at}>{formatDate(article.published_at)}</time> : null}
+                        {article.author_name ? <span className="text-ink">oleh {article.author_name}</span> : null}
+                    </div>
                 </div>
 
                 <h3 className="mt-4 text-lg font-semibold leading-snug text-ink">
-                    <Link href={`/berita/${article.slug}`} className="transition hover:text-primary-500">
+                    <Link href={`/artikel/${article.slug}`} className="transition hover:text-primary-500">
                         {article.title}
                     </Link>
                 </h3>
 
                 {article.excerpt ? (
-                    <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{article.excerpt}</p>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-ink">{article.excerpt}</p>
                 ) : null}
 
                 <Link
-                    href={`/berita/${article.slug}`}
+                    href={`/artikel/${article.slug}`}
                     className="mt-6 text-sm font-semibold text-primary-500 transition group-hover:translate-x-0.5"
                 >
                     Baca selengkapnya

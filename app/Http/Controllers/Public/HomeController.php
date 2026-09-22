@@ -31,7 +31,7 @@ class HomeController extends Controller
             'services' => $services,
             'articles' => $articles,
             'seo' => Seo::forPage(
-                'Internet Cepat dan Stabil untuk Rumah dan Usaha',
+                '',
                 'Layanan internet FWA dan FTTH dengan jangkauan yang terus bertambah di Kalimantan Selatan. Cek ketersediaan di area kamu.',
                 '/',
             ),

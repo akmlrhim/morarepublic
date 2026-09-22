@@ -37,9 +37,9 @@ class ArticleController extends Controller
                 ->get(['name', 'slug']),
             'activeCategory' => $categorySlug,
             'seo' => Seo::forPage(
-                'Berita',
+                'Artikel',
                 'Kabar terbaru, pengumuman layanan, dan artikel dari kami.',
-                '/berita',
+                '/artikel',
             ),
         ]);
     }
@@ -64,6 +64,7 @@ class ArticleController extends Controller
             'article' => [
                 'title' => $article->title,
                 'slug' => $article->slug,
+                'author_name' => $article->author_name,
                 'content' => $article->content,
                 'cover_image' => SiteConfig::asset($article->cover_image),
                 'published_at' => $article->published_at?->toIso8601String(),
@@ -73,8 +74,9 @@ class ArticleController extends Controller
             'seo' => Seo::forPage(
                 $article->meta_title ?: $article->title,
                 $article->meta_description ?: self::excerpt($article),
-                '/berita/'.$article->slug,
+                '/artikel/'.$article->slug,
                 $article->cover_image,
+                $article->meta_keywords,
             ),
         ]);
     }
@@ -87,6 +89,7 @@ class ArticleController extends Controller
         return [
             'title' => $article->title,
             'slug' => $article->slug,
+            'author_name' => $article->author_name,
             'excerpt' => self::excerpt($article),
             'cover_image' => SiteConfig::asset($article->cover_image),
             'published_at' => $article->published_at?->toIso8601String(),

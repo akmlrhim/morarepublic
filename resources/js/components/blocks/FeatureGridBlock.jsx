@@ -14,7 +14,7 @@ export default function FeatureGridBlock({ data }) {
                             <span aria-hidden="true" className="block h-1 w-10 rounded-full bg-ribbon-gradient" />
                             <h3 className="mt-5 text-xl font-semibold text-ink">{item.title}</h3>
                             {item.description ? (
-                                <p className="mt-3 text-sm leading-relaxed text-muted">{item.description}</p>
+                                <p className="mt-3 text-sm leading-relaxed text-ink">{item.description}</p>
                             ) : null}
                         </article>
                     </Reveal>

@@ -22,7 +22,7 @@ export default function AdvantagesBlock({ data }) {
                                     {item.title}
                                 </h3>
                                 {item.description ? (
-                                    <p className="mt-2 text-sm leading-relaxed text-muted">
+                                    <p className="mt-2 text-sm leading-relaxed text-ink">
                                         {item.description}
                                     </p>
                                 ) : null}

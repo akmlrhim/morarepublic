@@ -34,7 +34,7 @@ export default function ServiceShow({ service, seo }) {
                         {service.content ? (
                             <div className="prose-cms" dangerouslySetInnerHTML={{ __html: service.content }} />
                         ) : (
-                            <p className="text-base text-muted">Detail layanan sedang disiapkan.</p>
+                            <p className="text-base text-ink">Detail layanan sedang disiapkan.</p>
                         )}
                     </div>
 
@@ -45,8 +45,8 @@ export default function ServiceShow({ service, seo }) {
                                 Cek dulu ketersediaannya di area kamu, atau langsung tanya tim kami.
                             </p>
                             <div className="mt-6 flex flex-col gap-3">
-                                <Button href="/cek-coverage" variant="secondary" size="sm">
-                                    Cek Coverage
+                                <Button href="/kontak" variant="secondary" size="sm">
+                                    Tanya Kami
                                 </Button>
                                 {whatsapp.available ? (
                                     <Button

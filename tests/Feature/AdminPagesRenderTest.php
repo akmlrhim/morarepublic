@@ -17,8 +17,4 @@ it('merender semua halaman panel admin', function (string $url) {
     '/admin/categories',
     '/admin/categories/create',
     '/admin/contact-submissions',
-    '/admin/areas',
-    '/admin/areas/create',
-    '/admin/coverage-areas',
-    '/admin/coverage-areas/create',
 ]);

@@ -42,8 +42,8 @@ export default function HeroBlock({ data }) {
                                 {data.cta_text}
                             </Button>
                         ) : null}
-                        <Button href="/cek-coverage" variant="outline" size="lg">
-                            Cek Coverage
+                         <Button href="/kontak" variant="outline" size="lg">
+                             Tanya Kami
                         </Button>
                     </motion.div>
                 </div>

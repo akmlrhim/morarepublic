@@ -17,15 +17,19 @@ trait HasSeoMeta
     protected static function bootHasSeoMeta(): void
     {
         static::saving(function (self $model) {
-            $model->meta_title = Seo::trim($model->{$model->seoTitleSourceColumn()}, 70);
-
-            $description = $model->{$model->seoDescriptionSourceColumn()};
-
-            if (blank($description) && $fallback = $model->seoDescriptionFallbackColumn()) {
-                $description = $model->{$fallback};
+            if (blank($model->meta_title)) {
+                $model->meta_title = Seo::trim($model->{$model->seoTitleSourceColumn()}, 70);
             }
 
-            $model->meta_description = Seo::trim($description);
+            if (blank($model->meta_description)) {
+                $description = $model->{$model->seoDescriptionSourceColumn()};
+
+                if (blank($description) && $fallback = $model->seoDescriptionFallbackColumn()) {
+                    $description = $model->{$fallback};
+                }
+
+                $model->meta_description = Seo::trim($description);
+            }
         });
     }
 

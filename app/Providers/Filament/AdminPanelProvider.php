@@ -37,7 +37,6 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationGroups([
                 'Konten',
-                'Coverage',
                 'Inbox',
                 'Pengaturan',
             ])

@@ -14,7 +14,7 @@ export default function CompanyIntroBlock({ data }) {
                             className={
                                 index === 0
                                     ? 'text-balance-heading text-xl font-semibold leading-relaxed text-ink md:text-2xl'
-                                    : 'text-base leading-relaxed text-muted'
+                                    : 'text-base leading-relaxed text-ink'
                             }
                         >
                             {paragraph}

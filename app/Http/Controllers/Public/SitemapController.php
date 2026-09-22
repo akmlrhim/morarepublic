@@ -17,8 +17,8 @@ class SitemapController extends Controller
         $staticPaths = [
             'home' => ['/', '1.0'],
             'packages.index' => ['/paket-dan-harga', '0.8'],
-            'articles.index' => ['/berita', '0.8'],
-            'coverage.show' => ['/cek-coverage', '0.8'],
+            'articles.index' => ['/artikel', '0.8'],
+
             'contact.show' => ['/kontak', '0.8'],
             'about' => ['/tentang-kami', '0.7'],
             'faq' => ['/faq', '0.7'],
@@ -43,7 +43,7 @@ class SitemapController extends Controller
         Article::published()
             ->get(['slug', 'updated_at'])
             ->each(fn (Article $article) => $urls->push([
-                'loc' => url('/berita/'.$article->slug),
+                'loc' => url('/artikel/'.$article->slug),
                 'lastmod' => $article->updated_at?->toAtomString(),
                 'priority' => '0.6',
             ]));

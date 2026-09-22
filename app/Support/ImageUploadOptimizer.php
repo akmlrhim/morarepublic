@@ -37,7 +37,7 @@ class ImageUploadOptimizer
             return $component->saveUploadedFile($file);
         }
 
-        $encoded = (new ImageManager(new Driver()))
+        $encoded = (new ImageManager(new Driver))
             ->read($file->getRealPath())
             ->toWebp(quality: self::QUALITY);
 

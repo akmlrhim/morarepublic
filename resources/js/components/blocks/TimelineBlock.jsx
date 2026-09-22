@@ -16,7 +16,7 @@ export default function TimelineBlock({ data }) {
                         <p className="text-sm font-bold uppercase tracking-[0.14em] text-primary-500">{item.year}</p>
                         <h3 className="mt-2 text-xl font-semibold text-ink">{item.title}</h3>
                         {item.description ? (
-                            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">{item.description}</p>
+                            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink">{item.description}</p>
                         ) : null}
                     </li>
                 ))}

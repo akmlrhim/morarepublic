@@ -3,7 +3,7 @@
 use App\Http\Controllers\Public\ArticleController;
 use App\Http\Controllers\Public\CompanyController;
 use App\Http\Controllers\Public\ContactController;
-use App\Http\Controllers\Public\CoverageController;
+use App\Http\Controllers\Public\CoverageAreaController;
 use App\Http\Controllers\Public\FaqController;
 use App\Http\Controllers\Public\HomeController;
 // use App\Http\Controllers\Public\LandingPageController;
@@ -18,13 +18,12 @@ Route::get('/tentang-kami', [CompanyController::class, 'about'])->name('about');
 
 Route::get('/layanan/{service:slug}', [ServiceController::class, 'show'])->name('services.show');
 
+Route::get('/coverage-area', CoverageAreaController::class)->name('coverage.index');
+
 Route::get('/paket-dan-harga', [PackageController::class, 'index'])->name('packages.index');
 
-Route::get('/berita', [ArticleController::class, 'index'])->name('articles.index');
-Route::get('/berita/{article:slug}', [ArticleController::class, 'show'])->name('articles.show');
-
-Route::get('/cek-coverage', [CoverageController::class, 'show'])->name('coverage.show');
-Route::post('/cek-coverage', [CoverageController::class, 'check'])->name('coverage.check');
+Route::get('/artikel', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/artikel/{article:slug}', [ArticleController::class, 'show'])->name('articles.show');
 
 Route::get('/faq', FaqController::class)->name('faq');
 
@@ -37,7 +36,7 @@ Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 
 Route::get('/robots.txt', function () {
     return response(
-        "User-agent: *\nDisallow: /admin\nDisallow: /livewire\n\nSitemap: " . url('/sitemap.xml') . "\n"
+        "User-agent: *\nDisallow: /admin\nDisallow: /livewire\n\nSitemap: ".url('/sitemap.xml')."\n"
     )->header('Content-Type', 'text/plain');
 })->name('robots');
 

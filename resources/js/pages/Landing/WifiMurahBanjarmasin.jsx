@@ -63,8 +63,8 @@ export default function WifiMurahBanjarmasin({ area, product, seo }) {
 
                         <div className="mt-9 flex flex-wrap gap-3">
                             {cta}
-                            <Button href="/cek-coverage" variant="outline" size="lg">
-                                Cek Coverage
+                             <Button href="/kontak" variant="outline" size="lg">
+                                 Tanya Kami
                             </Button>
                         </div>
                     </div>
@@ -81,7 +81,7 @@ export default function WifiMurahBanjarmasin({ area, product, seo }) {
                         >
                             <span aria-hidden="true" className="block h-1 w-10 rounded-full bg-ribbon-gradient" />
                             <h3 className="mt-5 text-lg font-semibold text-ink">{benefit.title}</h3>
-                            <p className="mt-3 text-sm leading-relaxed text-muted">{benefit.description}</p>
+                            <p className="mt-3 text-sm leading-relaxed text-ink">{benefit.description}</p>
                         </article>
                     ))}
                 </div>

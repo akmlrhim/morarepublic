@@ -96,7 +96,7 @@ export default function Accordion({ items = [], className }) {
                                     transition={{ duration: reducedMotion ? 0 : 0.25, ease: 'easeInOut' }}
                                     className="overflow-hidden"
                                 >
-                                    <div className="space-y-3 pb-6 text-sm leading-relaxed text-muted">
+                                    <div className="space-y-3 pb-6 text-sm leading-relaxed text-ink">
                                         {renderAnswer(item.answer)}
                                     </div>
                                 </motion.div>

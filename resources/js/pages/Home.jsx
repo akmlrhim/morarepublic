@@ -135,33 +135,12 @@ export default function Home({ services = [], articles = [], seo }) {
                 </Section>
             ) : null}
 
-            <section className="relative isolate overflow-hidden py-16 md:py-24">
-                <HeroBackground image="/img/coverage.webp" variant="compact" />
-
-                <div className="relative mx-auto w-full max-w-[1280px] px-6 lg:px-12">
-                    <div className="max-w-xl">
-                        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">Cek Coverage</p>
-                        <h2 className="text-balance-heading mt-3 text-[28px] font-extrabold leading-[1.1] text-white md:text-[40px]">
-                            Sudah terjangkau di area kamu?
-                        </h2>
-                        <p className="mt-4 max-w-md text-sm leading-relaxed text-white/85 md:text-base">
-                            Masukkan nama kota atau kecamatan kamu, lalu pilih jenis layanan. Hasilnya langsung
-                            kelihatan tanpa perlu isi data pribadi. Kalau area kamu belum tercover, kamu tetap bisa
-                            masuk daftar tunggu supaya diprioritaskan saat jaringan kami masuk ke sana.
-                        </p>
-                        <Button href="/cek-coverage" variant="outline" size="lg" className="mt-7">
-                            Cek Coverage Sekarang
-                        </Button>
-                    </div>
-                </div>
-            </section>
-
             {articles.length > 0 ? (
                 <Section>
                     <div className="flex flex-wrap items-end justify-between gap-6">
-                        <SectionHeading eyebrow="Berita" title="Kabar terbaru dari kami" />
-                        <Link href="/berita" className="text-sm font-semibold text-primary-500">
-                            Lihat semua berita
+                        <SectionHeading eyebrow="Artikel" title="Kabar terbaru dari kami" />
+                         <Link href="/artikel" className="text-sm font-semibold text-primary-500">
+                            Lihat semua artikel
                             <span aria-hidden="true"> &rsaquo;</span>
                         </Link>
                     </div>

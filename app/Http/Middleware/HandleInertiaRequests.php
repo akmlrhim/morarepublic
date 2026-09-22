@@ -42,7 +42,7 @@ class HandleInertiaRequests extends Middleware
             'flash' => fn () => [
                 'success' => $request->session()->get('success'),
                 'error' => $request->session()->get('error'),
-                'coverageResult' => $request->session()->get('coverageResult'),
+
             ],
             'tracking' => fn () => [
                 'search_term' => $request->query('q') ?: $request->query('utm_term'),

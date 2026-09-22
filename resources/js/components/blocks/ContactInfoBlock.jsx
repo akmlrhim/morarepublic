@@ -10,13 +10,13 @@ export default function ContactInfoBlock({ data }) {
                     {data.address ? (
                         <div>
                             <dt className="text-[13px] font-semibold uppercase tracking-[0.14em] text-primary-500">Alamat</dt>
-                            <dd className="mt-2 whitespace-pre-line text-base text-muted">{data.address}</dd>
+                            <dd className="mt-2 whitespace-pre-line text-base text-ink">{data.address}</dd>
                         </div>
                     ) : null}
                     {data.hours ? (
                         <div>
                             <dt className="text-[13px] font-semibold uppercase tracking-[0.14em] text-primary-500">Jam Operasional</dt>
-                            <dd className="mt-2 text-base text-muted">{data.hours}</dd>
+                            <dd className="mt-2 text-base text-ink">{data.hours}</dd>
                         </div>
                     ) : null}
                     {data.email ? (
@@ -61,9 +61,9 @@ export default function ContactInfoBlock({ data }) {
                                     <WhatsappIcon className="mt-0.5 h-4 w-4 shrink-0 text-primary-600" />
                                     <span className="text-sm leading-relaxed">
                                         <span className="block font-semibold text-ink">{person.name}</span>
-                                        <span className="block text-muted">{person.phone}</span>
+                                        <span className="block text-ink">{person.phone}</span>
                                         {person.role ? (
-                                            <span className="block text-muted">{person.role}</span>
+                                            <span className="block text-ink">{person.role}</span>
                                         ) : null}
                                     </span>
                                 </a>
