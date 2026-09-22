@@ -58,11 +58,11 @@ it('tidak memuat landing page yang rutenya sedang dinonaktifkan', function () {
         ->assertDontSee(url('/wifi-murah-banjarmasin'));
 });
 
-it('menyusun menu utama jadi empat item', function () {
+it('menyusun menu utama jadi lima item', function () {
     $nav = SiteConfig::nav();
 
-    expect($nav)->toHaveCount(4)
-        ->and(array_column($nav, 'label'))->toBe(['Beranda', 'Tentang Kami', 'Artikel', 'Kontak']);
+    expect($nav)->toHaveCount(5)
+        ->and(array_column($nav, 'label'))->toBe(['Beranda', 'Tentang Kami', 'Artikel', 'Coverage Area', 'Kontak']);
 });
 
 it('meratakan menu untuk footer tanpa kehilangan halaman', function () {
@@ -71,8 +71,8 @@ it('meratakan menu untuk footer tanpa kehilangan halaman', function () {
     expect($hrefs)->toBe([
         '/',
         '/tentang-kami',
-
         '/artikel',
+        '/coverage-area',
         '/kontak',
     ]);
 });

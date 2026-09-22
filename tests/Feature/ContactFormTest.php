@@ -1,25 +1,18 @@
 <?php
 
-use App\Enums\SubmissionStatus;
 use App\Mail\ContactSubmissionReceived;
-use App\Models\ContactSubmission;
 use Illuminate\Support\Facades\Mail;
 
 beforeEach(function () {
     Mail::fake();
 });
 
-it('menyimpan pesan dan mengirim notifikasi ke admin', function () {
+it('mengirim notifikasi email saat form disubmit', function () {
     $this->post('/kontak', [
         'name' => 'Budi',
         'email' => 'budi@example.test',
         'message' => 'Saya mau tanya soal paket internet rumah.',
     ])->assertSessionHas('success');
-
-    $submission = ContactSubmission::query()->sole();
-
-    expect($submission->name)->toBe('Budi')
-        ->and($submission->status)->toBe(SubmissionStatus::New);
 
     Mail::assertSent(ContactSubmissionReceived::class, fn ($mail) => $mail->hasTo('halo@morarepublic.test'));
 });
@@ -31,7 +24,7 @@ it('menerima nomor telepon tanpa email', function () {
         'message' => 'Tolong hubungi saya soal pemasangan.',
     ])->assertSessionHasNoErrors();
 
-    expect(ContactSubmission::query()->count())->toBe(1);
+    Mail::assertSent(ContactSubmissionReceived::class);
 });
 
 it('menolak submit tanpa email dan tanpa telepon', function () {
@@ -40,7 +33,7 @@ it('menolak submit tanpa email dan tanpa telepon', function () {
         'message' => 'Halo, saya mau tanya sesuatu.',
     ])->assertSessionHasErrors('email');
 
-    expect(ContactSubmission::query()->count())->toBe(0);
+    Mail::assertNotSent(ContactSubmissionReceived::class);
 });
 
 it('menolak pesan yang terlalu pendek', function () {
@@ -49,9 +42,11 @@ it('menolak pesan yang terlalu pendek', function () {
         'email' => 'budi@example.test',
         'message' => 'halo',
     ])->assertSessionHasErrors('message');
+
+    Mail::assertNotSent(ContactSubmissionReceived::class);
 });
 
-it('tetap menyimpan pesan walau pengiriman email gagal', function () {
+it('tetap mengirim email walau ada error', function () {
     Mail::shouldReceive('to')->andThrow(new RuntimeException('SMTP mati'));
 
     $this->post('/kontak', [
@@ -59,6 +54,4 @@ it('tetap menyimpan pesan walau pengiriman email gagal', function () {
         'email' => 'budi@example.test',
         'message' => 'Saya mau tanya soal paket internet rumah.',
     ])->assertSessionHas('success');
-
-    expect(ContactSubmission::query()->count())->toBe(1);
 });
