@@ -47,7 +47,7 @@ export default function MissionBlock({ data }) {
                     <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-white/70">
                         Visi
                     </p>
-                    <p className="text-balance-heading mt-4 text-[24px] font-bold leading-snug md:text-[32px]">
+                    <p className="text-balance-heading mt-4 text-[19px] font-bold leading-snug sm:text-[21px] md:text-[32px]">
                         {data?.visi}
                     </p>
                 </div>

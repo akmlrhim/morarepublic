@@ -13,7 +13,7 @@ export default function CtaBlock({ data }) {
                             className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-ribbon-gradient opacity-40 blur-3xl"
                         />
                         <div className="relative mx-auto max-w-2xl">
-                            <h2 className="text-balance-heading text-[28px] font-bold leading-tight text-white md:text-[40px]">
+                            <h2 className="text-balance-heading text-[22px] font-bold leading-tight text-white sm:text-[24px] md:text-[40px]">
                                 {data.heading}
                             </h2>
                             {data.description ? (

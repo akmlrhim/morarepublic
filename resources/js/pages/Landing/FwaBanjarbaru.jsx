@@ -49,7 +49,7 @@ export default function FwaBanjarbaru({ area, product, seo }) {
                     <div className="max-w-3xl">
                         <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-white/80">Area Banjarbaru</p>
 
-                        <h1 className="text-balance-heading mt-3 text-[34px] font-extrabold leading-[1.1] text-white drop-shadow-[0_2px_12px_rgba(46,15,77,0.45)] md:text-[58px]">
+                        <h1 className="text-balance-heading mt-3 text-[26px] font-extrabold leading-[1.1] text-white drop-shadow-[0_2px_12px_rgba(46,15,77,0.45)] sm:text-[30px] md:text-[58px]">
                             Internet FWA Banjarbaru Tanpa Perlu Tarik Kabel
                         </h1>
 

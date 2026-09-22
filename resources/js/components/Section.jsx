@@ -30,7 +30,7 @@ export function SectionHeading({ eyebrow, title, description, align = 'left', to
             {title ? (
                 <h2
                     className={cx(
-                        'text-balance-heading mt-3 text-[28px] font-bold leading-tight md:text-[40px]',
+                        'text-balance-heading mt-3 text-[22px] font-bold leading-tight sm:text-[24px] md:text-[40px]',
                         tone === 'dark' ? 'text-white' : 'text-ink',
                     )}
                 >

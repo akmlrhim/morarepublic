@@ -24,7 +24,7 @@ export default function HeroBlock({ data }) {
                 <div className="max-w-3xl">
                     <motion.h1
                         {...fadeUp(0)}
-                        className="text-balance-heading text-[36px] font-extrabold leading-[1.08] text-white drop-shadow-[0_2px_12px_rgba(46,15,77,0.5)] md:text-[64px]"
+                        className="text-balance-heading text-[28px] font-extrabold leading-[1.08] text-white drop-shadow-[0_2px_12px_rgba(46,15,77,0.5)] sm:text-[32px] md:text-[64px]"
                     >
                         {data.heading}
                     </motion.h1>

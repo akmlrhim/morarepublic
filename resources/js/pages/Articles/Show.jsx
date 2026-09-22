@@ -1,5 +1,6 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import ArticleCard from '../../components/ArticleCard';
+import ShareButtons from '../../components/ShareButtons';
 import { Container, Section, SectionHeading } from '../../components/Section';
 import PublicLayout from '../../layouts/PublicLayout';
 import { formatDate } from '../../lib/format';
@@ -49,26 +50,29 @@ export default function ArticleShow({ article, related = [], seo }) {
                         ) : null}
                     </nav>
 
-                    <h1 className="text-balance-heading mt-6 max-w-4xl text-[30px] font-extrabold leading-tight text-ink md:text-[44px]">
+                    <h1 className="text-balance-heading mt-6 max-w-4xl text-[20px] font-extrabold leading-tight text-ink sm:text-[28px] md:text-[44px]">
                         {article.title}
                      </h1>
 
-                    <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-ink">
+                    <div className="mt-4 flex flex-col gap-2 text-sm text-ink sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
                         {article.published_at ? (
                             <span>
                                 Dipublikasikan <time dateTime={article.published_at}>{formatDate(article.published_at)}</time>
                             </span>
                         ) : null}
                         {article.author_name ? (
-                            <>
-                                <span aria-hidden="true" className="text-xs">
-                                    •
-                                </span>
-                                <span>
-                                    Oleh <span className="font-medium text-ink">{article.author_name}</span>
-                                </span>
-                            </>
+                            <span className="flex items-center gap-1.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-4 text-muted">
+                                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                <span className="font-medium text-ink">{article.author_name}</span>
+                            </span>
                         ) : null}
+                    </div>
+
+                    <div className="mt-6 border-t border-gray-200 pt-4">
+                        <ShareButtons title={article.title} />
                     </div>
                 </Container>
 
