@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Public;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactSubmissionRequest;
 use App\Mail\ContactSubmissionReceived;
-use App\Models\ContactSubmission;
 use App\Support\Seo;
 use App\Support\SiteConfig;
 use Illuminate\Http\RedirectResponse;
@@ -30,17 +29,14 @@ class ContactController extends Controller
 
     public function store(ContactSubmissionRequest $request): RedirectResponse
     {
-        $submission = ContactSubmission::create($request->validated());
-
+        $data = $request->validated();
         $recipient = SiteConfig::notificationEmail();
 
         if (filled($recipient)) {
             try {
-                Mail::to($recipient)->send(new ContactSubmissionReceived($submission));
+                Mail::to($recipient)->send(new ContactSubmissionReceived($data));
             } catch (Throwable $exception) {
-                // Pesan sudah tersimpan, jadi kegagalan email tidak boleh menggagalkan submit.
                 Log::error('Gagal kirim notifikasi form kontak.', [
-                    'submission_id' => $submission->id,
                     'error' => $exception->getMessage(),
                 ]);
             }

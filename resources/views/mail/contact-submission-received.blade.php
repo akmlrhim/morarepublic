@@ -3,19 +3,15 @@
 
 Ada pesan masuk lewat form kontak.
 
-- **Nama:** {{ $submission->name }}
-- **Email:** {{ $submission->email ?: 'Tidak diisi' }}
-- **Telepon:** {{ $submission->phone ?: 'Tidak diisi' }}
-- **Subjek:** {{ $submission->subject ?: 'Tidak diisi' }}
-- **Waktu:** {{ $submission->created_at->format('d M Y H:i') }}
+- **Nama:** {{ $data['name'] }}
+- **Email:** {{ $data['email'] ?: 'Tidak diisi' }}
+- **Telepon:** {{ $data['phone'] ?: 'Tidak diisi' }}
+- **Subjek:** {{ $data['subject'] ?: 'Tidak diisi' }}
+- **Waktu:** {{ now()->format('d M Y H:i') }}
 
 **Isi pesan:**
 
-{{ $submission->message }}
-
-<x-mail::button :url="\App\Filament\Resources\ContactSubmissions\ContactSubmissionResource::getUrl('edit', ['record' => $submission])">
-Buka di CMS
-</x-mail::button>
+{{ $data['message'] }}
 
 Terima kasih,<br>
 {{ config('app.name') }}
