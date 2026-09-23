@@ -68,7 +68,7 @@ class ArticleSeeder extends Seeder
                     'excerpt' => $article['excerpt'],
                     'content' => $article['content'],
                     'meta_keywords' => $article['meta_keywords'] ?? null,
-                    'published_at' => now()->subDays($article['days_ago']),
+                    'created_at' => now()->subDays($article['days_ago']),
                     'status' => PublishStatus::Published,
                 ],
             );

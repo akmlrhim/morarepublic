@@ -35,15 +35,24 @@ it('hanya menampilkan layanan yang published', function () {
     $this->get('/layanan/rahasia')->assertNotFound();
 });
 
-it('menyembunyikan artikel yang tanggal publishnya belum tiba', function () {
+it('menampilkan artikel published tanpa kolom published_at', function () {
     Article::create([
         'slug' => 'nanti',
         'title' => 'Nanti',
         'status' => PublishStatus::Published,
-        'published_at' => now()->addWeek(),
     ]);
 
-    $this->get('/artikel/nanti')->assertNotFound();
+    $this->get('/artikel/nanti')->assertOk();
+});
+
+it('menyembunyikan artikel draft', function () {
+    Article::create([
+        'slug' => 'draft',
+        'title' => 'Draft',
+        'status' => PublishStatus::Draft,
+    ]);
+
+    $this->get('/artikel/draft')->assertNotFound();
 });
 
 it('membuat sitemap yang memuat halaman statis', function () {

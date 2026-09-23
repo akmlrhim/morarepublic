@@ -9,7 +9,6 @@ it('mengirim data artikel ke halaman publik', function () {
             'slug' => 'artikel-'.$number,
             'title' => 'Artikel '.$number,
             'status' => PublishStatus::Published,
-            'published_at' => now()->subDay(),
         ]);
     }
 

@@ -4,7 +4,6 @@ namespace App\Filament\Resources\Articles\Schemas;
 
 use App\Enums\PublishStatus;
 use App\Support\ImageUploadOptimizer;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -42,11 +41,6 @@ class ArticleForm
                                     ->placeholder('Contoh: Berita, Promo, Tips')
                                     ->required(),
                             ]),
-                        DateTimePicker::make('published_at')
-                            ->label('Tanggal publish')
-                            ->placeholder('Pilih tanggal dan waktu')
-                            ->seconds(false)
-                            ->default(now()),
                         FileUpload::make('cover_image')
                             ->label('Gambar cover')
                             ->image()

@@ -25,7 +25,7 @@ class ArticleController extends Controller
                 'category',
                 fn ($q) => $q->where('slug', $categorySlug)
             ))
-            ->orderByDesc('published_at')
+            ->orderByDesc('created_at')
             ->paginate(9)
             ->withQueryString()
             ->through(fn (Article $article) => self::toCard($article));
@@ -46,16 +46,12 @@ class ArticleController extends Controller
 
     public function show(Article $article): Response
     {
-        abort_unless(
-            $article->status === PublishStatus::Published
-                && ($article->published_at === null || $article->published_at->isPast()),
-            404
-        );
+        abort_unless($article->status === PublishStatus::Published, 404);
 
         $related = Article::published()
             ->whereKeyNot($article->getKey())
             ->when($article->category_id, fn ($query) => $query->where('category_id', $article->category_id))
-            ->orderByDesc('published_at')
+            ->orderByDesc('created_at')
             ->limit(3)
             ->get()
             ->map(fn (Article $item) => self::toCard($item));
@@ -67,7 +63,7 @@ class ArticleController extends Controller
                 'author_name' => $article->author_name,
                 'content' => $article->content,
                 'cover_image' => SiteConfig::asset($article->cover_image),
-                'published_at' => $article->published_at?->toIso8601String(),
+                'published_at' => $article->created_at?->toIso8601String(),
                 'category' => $article->category?->only(['name', 'slug']),
             ],
             'related' => $related,
@@ -92,7 +88,7 @@ class ArticleController extends Controller
             'author_name' => $article->author_name,
             'excerpt' => self::excerpt($article),
             'cover_image' => SiteConfig::asset($article->cover_image),
-            'published_at' => $article->published_at?->toIso8601String(),
+            'published_at' => $article->created_at?->toIso8601String(),
             'category' => $article->category?->only(['name', 'slug']),
         ];
     }

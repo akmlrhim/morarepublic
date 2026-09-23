@@ -26,11 +26,10 @@ class ArticlesTable
                     ->label('Kategori')
                     ->badge()
                     ->placeholder('Tanpa kategori'),
-                TextColumn::make('published_at')
-                    ->label('Publish')
+                TextColumn::make('created_at')
+                    ->label('Dibuat')
                     ->dateTime('d M Y H:i')
-                    ->sortable()
-                    ->placeholder('Belum dijadwalkan'),
+                    ->sortable(),
                 TextColumn::make('status')
                     ->label('Status')
                     ->badge(),
@@ -52,6 +51,6 @@ class ArticlesTable
                     DeleteBulkAction::make(),
                 ]),
             ])
-            ->defaultSort('published_at', 'desc');
+            ->defaultSort('created_at', 'desc');
     }
 }

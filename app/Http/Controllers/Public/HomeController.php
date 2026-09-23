@@ -22,7 +22,7 @@ class HomeController extends Controller
 
         $articles = Article::published()
             ->with('category')
-            ->orderByDesc('published_at')
+            ->orderByDesc('created_at')
             ->limit(3)
             ->get()
             ->map(fn (Article $article) => ArticleController::toCard($article));

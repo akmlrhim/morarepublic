@@ -25,14 +25,12 @@ class Article extends Model
         'meta_title',
         'meta_description',
         'meta_keywords',
-        'published_at',
         'status',
     ];
 
     protected function casts(): array
     {
         return [
-            'published_at' => 'datetime',
             'status' => PublishStatus::class,
         ];
     }
@@ -44,10 +42,7 @@ class Article extends Model
 
     public function scopePublished(Builder $query): Builder
     {
-        return $query->where('status', PublishStatus::Published)
-            ->where(function (Builder $query) {
-                $query->whereNull('published_at')->orWhere('published_at', '<=', now());
-            });
+        return $query->where('status', PublishStatus::Published);
     }
 
     public function slugSourceColumn(): string
