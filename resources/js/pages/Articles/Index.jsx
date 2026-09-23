@@ -10,6 +10,7 @@ import { cx } from '../../lib/format';
 
 export default function ArticlesIndex({ articles, categories = [], activeCategory, seo }) {
     const [loading, setLoading] = useState(false);
+    const articleItems = Array.isArray(articles) ? articles : articles?.data ?? [];
 
     useEffect(() => {
         const stopStart = router.on('start', () => setLoading(true));
@@ -78,9 +79,9 @@ export default function ArticlesIndex({ articles, categories = [], activeCategor
                             <ArticleCardSkeleton key={index} />
                         ))}
                     </div>
-                ) : articles.data.length > 0 ? (
+                ) : articleItems.length > 0 ? (
                     <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                        {articles.data.map((article) => (
+                        {articleItems.map((article) => (
                             <ArticleCard key={article.slug} article={article} />
                         ))}
                     </div>
